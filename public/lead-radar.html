@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Radar — Livane</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #16161f;
+    --border: #1e1e2e;
+    --border2: #2a2a3e;
+    --text: #e8e8f0;
+    --muted: #6b6b8a;
+    --hot: #ff4444;
+    --hot-dim: rgba(255,68,68,0.12);
+    --warm: #ff8c00;
+    --warm-dim: rgba(255,140,0,0.12);
+    --cold: #3b82f6;
+    --cold-dim: rgba(59,130,246,0.1);
+    --cyan: #00d4ff;
+    --cyan-dim: rgba(0,212,255,0.08);
+    --green: #22c55e;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── LOGIN ── */
+  #login-screen {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 999;
+  }
+
+  .login-box {
+    width: 360px;
+    border: 1px solid var(--border2);
+    padding: 48px 40px;
+    background: var(--surface);
+    position: relative;
+  }
+
+  .login-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  }
+
+  .login-logo {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .login-title {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .login-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+
+  .login-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .login-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 12px 16px;
+    outline: none;
+    margin-bottom: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .login-input:focus { border-color: var(--cyan); }
+
+  .login-btn {
+    width: 100%;
+    background: var(--cyan);
+    color: #000;
+    border: none;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .login-btn:hover { opacity: 0.85; }
+
+  .login-error {
+    font-size: 11px;
+    color: var(--hot);
+    margin-top: 12px;
+    display: none;
+    text-align: center;
+  }
+
+  /* ── APP ── */
+  #app { display: none; }
+
+  /* ── HEADER ── */
+  .app-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+
+  .header-left {
+    display: flex; align-items: center; gap: 20px;
+  }
+
+  .header-logo {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .header-badge {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: var(--cyan-dim);
+    border: 1px solid rgba(0,212,255,0.2);
+    padding: 3px 8px;
+  }
+
+  .header-right {
+    display: flex; align-items: center; gap: 16px;
+  }
+
+  .header-time {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .logout-btn {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border2);
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .logout-btn:hover { color: var(--text); border-color: var(--muted); }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    background: var(--surface);
+  }
+
+  .tab {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 14px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  .tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+  .tab:hover:not(.active) { color: var(--text); }
+
+  .tab-count {
+    display: inline-block;
+    background: var(--border2);
+    color: var(--muted);
+    font-size: 9px;
+    padding: 1px 6px;
+    margin-left: 8px;
+    border-radius: 20px;
+  }
+
+  .tab.active .tab-count {
+    background: var(--cyan-dim);
+    color: var(--cyan);
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 24px 32px; }
+
+  /* ── FILTERS ── */
+  .filters {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end;
+  }
+
+  .filter-group {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+
+  .filter-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .filter-input, .filter-select {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 8px 12px;
+    outline: none;
+    min-width: 140px;
+    transition: border-color 0.2s;
+  }
+
+  .filter-input:focus, .filter-select:focus { border-color: var(--cyan); }
+  .filter-select option { background: var(--surface2); }
+
+  .filter-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-weight: 600;
+  }
+
+  .filter-btn.primary { background: var(--cyan); color: #000; }
+  .filter-btn.secondary { background: var(--border2); color: var(--muted); }
+  .filter-btn.export { background: var(--surface2); color: var(--text); border: 1px solid var(--border2); }
+  .filter-btn:hover { opacity: 0.8; }
+
+  /* ── UPLOAD ZONE ── */
+  .upload-section {
+    display: flex; gap: 16px; margin-bottom: 20px;
+  }
+
+  .upload-zone {
+    flex: 1;
+    border: 1px dashed var(--border2);
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+    background: var(--surface);
+  }
+
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+
+  .upload-icon { font-size: 24px; margin-bottom: 8px; }
+
+  .upload-title {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .upload-sub { font-size: 10px; color: var(--muted); }
+  .upload-loaded { font-size: 10px; color: var(--green); margin-top: 4px; }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: flex; gap: 12px; margin-bottom: 20px;
+  }
+
+  .stat-card {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .stat-card.hot::after { background: var(--hot); }
+  .stat-card.warm::after { background: var(--warm); }
+  .stat-card.cold::after { background: var(--cold); }
+  .stat-card.total::after { background: var(--cyan); }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-family: var(--sans);
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .stat-card.hot .stat-value { color: var(--hot); }
+  .stat-card.warm .stat-value { color: var(--warm); }
+  .stat-card.cold .stat-value { color: var(--cold); }
+  .stat-card.total .stat-value { color: var(--cyan); }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .lead-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .lead-table th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .lead-table th:hover { color: var(--text); }
+
+  .lead-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .lead-table tr:last-child td { border-bottom: none; }
+
+  .lead-table tr:hover td { background: var(--surface2); }
+
+  /* temperature badges */
+  .temp-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 9px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  .temp-badge.hot { background: var(--hot-dim); color: var(--hot); border: 1px solid rgba(255,68,68,0.25); }
+  .temp-badge.warm { background: var(--warm-dim); color: var(--warm); border: 1px solid rgba(255,140,0,0.25); }
+  .temp-badge.cold { background: var(--cold-dim); color: var(--cold); border: 1px solid rgba(59,130,246,0.2); }
+
+  .temp-dot { width: 5px; height: 5px; border-radius: 50%; }
+  .hot .temp-dot { background: var(--hot); box-shadow: 0 0 4px var(--hot); }
+  .warm .temp-dot { background: var(--warm); box-shadow: 0 0 4px var(--warm); }
+  .cold .temp-dot { background: var(--cold); }
+
+  /* score */
+  .score-pill {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 800;
+    min-width: 32px;
+    text-align: center;
+    padding: 2px 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text);
+  }
+
+  /* status dropdown */
+  .status-select {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 8px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .status-select:focus { border-color: var(--cyan); }
+
+  /* contact badge */
+  .contact-badge {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    background: var(--surface2);
+    white-space: nowrap;
+  }
+
+  .contact-badge.has-contact { border-color: rgba(34,197,94,0.3); color: var(--green); background: rgba(34,197,94,0.06); }
+
+  /* detail btn */
+  .detail-btn {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    background: none;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .detail-btn:hover { color: var(--cyan); border-color: var(--cyan); }
+
+  /* permit badge */
+  .permit-yes { color: var(--green); font-size: 10px; }
+  .permit-no { color: var(--muted); font-size: 10px; }
+
+  /* ── DETAIL PANEL ── */
+  #detail-panel {
+    position: fixed;
+    top: 0; right: -520px;
+    width: 520px; height: 100vh;
+    background: var(--surface);
+    border-left: 1px solid var(--border2);
+    z-index: 200;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    display: flex; flex-direction: column;
+  }
+
+  #detail-panel.open { right: 0; }
+
+  .panel-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0;
+    background: var(--surface);
+    z-index: 10;
+  }
+
+  .panel-title {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .panel-close {
+    background: none; border: none;
+    color: var(--muted); font-size: 18px;
+    cursor: pointer; line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .panel-close:hover { color: var(--text); }
+
+  .panel-body { padding: 24px; flex: 1; }
+
+  .panel-section {
+    margin-bottom: 24px;
+  }
+
+  .panel-section-title {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel-row {
+    display: flex; justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+
+  .panel-row:last-child { border-bottom: none; }
+
+  .panel-key {
+    font-size: 10px;
+    color: var(--muted);
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+
+  .panel-val {
+    font-size: 11px;
+    color: var(--text);
+    text-align: right;
+    word-break: break-word;
+  }
+
+  .panel-val.highlight { color: var(--cyan); }
+  .panel-val.hot { color: var(--hot); }
+  .panel-val.warm { color: var(--warm); }
+  .panel-val.green { color: var(--green); }
+
+  .action-box {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-left: 3px solid var(--cyan);
+    padding: 14px 16px;
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center;
+    padding: 80px 32px;
+    color: var(--muted);
+  }
+
+  .empty-icon { font-size: 40px; margin-bottom: 16px; opacity: 0.4; }
+
+  .empty-title {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    opacity: 0.5;
+  }
+
+  .empty-sub { font-size: 12px; line-height: 1.6; }
+
+  /* ── OPPORTUNITY TRACK ── */
+  .opp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .opp-card:hover { border-color: var(--border2); }
+
+  .opp-card.hot { border-left: 3px solid var(--hot); }
+  .opp-card.warm { border-left: 3px solid var(--warm); }
+  .opp-card.cold { border-left: 3px solid var(--cold); }
+
+  .opp-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 12px; gap: 16px;
+  }
+
+  .opp-source {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .opp-title {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .opp-meta {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .opp-tag {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+  }
+
+  .opp-action {
+    font-size: 11px;
+    color: var(--cyan);
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  /* ── OVERLAY ── */
+  #overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 190;
+    display: none;
+  }
+
+  #overlay.open { display: block; }
+
+  /* ── NOTIFICATION ── */
+  #notification {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-left: 3px solid var(--cyan);
+    padding: 12px 20px;
+    font-size: 12px;
+    color: var(--text);
+    z-index: 300;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  #notification.show { transform: translateY(0); opacity: 1; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Livane Renovation</div>
+    <div class="login-title">Lead Radar</div>
+    <div class="login-sub">Private intelligence dashboard</div>
+    <label class="login-label">Access Password</label>
+    <input type="password" class="login-input" id="pw-input" placeholder="••••••••" autocomplete="current-password">
+    <button class="login-btn" onclick="doLogin()">Enter Dashboard</button>
+    <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-left">
+      <span class="header-logo">Livane</span>
+      <span class="header-badge">Lead Radar</span>
+    </div>
+    <div class="header-right">
+      <span class="header-time" id="clock"></span>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('property')" id="tab-property">
+      Property Triggers <span class="tab-count" id="cnt-property">0</span>
+    </button>
+    <button class="tab" onclick="switchTab('opportunity')" id="tab-opportunity">
+      Active Opportunities <span class="tab-count" id="cnt-opportunity">0</span>
+    </button>
+    <button class="tab" onclick="switchTab('gc')" id="tab-gc">
+      GC / Architect Leads <span class="tab-count" id="cnt-gc">0</span>
+    </button>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- UPLOAD -->
+    <div class="upload-section" id="upload-section">
+      <div class="upload-zone" id="zone-property" ondragover="dragOver(event,'zone-property')" ondragleave="dragLeave('zone-property')" ondrop="dropFile(event,'property')">
+        <input type="file" accept=".csv" onchange="loadCSV(event,'property')">
+        <div class="upload-icon">📋</div>
+        <div class="upload-title">Property / Sales CSV</div>
+        <div class="upload-sub">Miami-Dade PAPA export · Drag & drop or click</div>
+        <div class="upload-loaded" id="loaded-property"></div>
+      </div>
+      <div class="upload-zone" id="zone-permit" ondragover="dragOver(event,'zone-permit')" ondragleave="dragLeave('zone-permit')" ondrop="dropFile(event,'permit')">
+        <input type="file" accept=".csv" onchange="loadCSV(event,'permit')">
+        <div class="upload-icon">🏗️</div>
+        <div class="upload-title">Permit CSV</div>
+        <div class="upload-sub">Miami-Dade Building Dept export · Drag & drop or click</div>
+        <div class="upload-loaded" id="loaded-permit"></div>
+      </div>
+      <div class="upload-zone" id="zone-opp" ondragover="dragOver(event,'zone-opp')" ondragleave="dragLeave('zone-opp')" ondrop="dropFile(event,'opportunity')">
+        <input type="file" accept=".csv" onchange="loadCSV(event,'opportunity')">
+        <div class="upload-icon">⚡</div>
+        <div class="upload-title">Opportunities CSV</div>
+        <div class="upload-sub">Craigslist / job board export (Faz 2)</div>
+        <div class="upload-loaded" id="loaded-opportunity"></div>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">Start Date</span>
+        <input type="date" class="filter-input" id="f-start" style="width:140px">
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">End Date</span>
+        <input type="date" class="filter-input" id="f-end" style="width:140px">
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">City</span>
+        <select class="filter-select" id="f-city">
+          <option value="">All Cities</option>
+          <option>Miami</option>
+          <option>Miami Beach</option>
+          <option>Aventura</option>
+          <option>Sunny Isles Beach</option>
+          <option>Bal Harbour</option>
+          <option>Bay Harbor Islands</option>
+          <option>Surfside</option>
+          <option>Coral Gables</option>
+          <option>Coconut Grove</option>
+          <option>Brickell</option>
+          <option>North Miami</option>
+          <option>Fort Lauderdale</option>
+          <option>Broward</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Min Sale Price</span>
+        <input type="number" class="filter-input" id="f-price" placeholder="700000" style="width:140px">
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Temperature</span>
+        <select class="filter-select" id="f-temp" style="width:120px">
+          <option value="">All</option>
+          <option value="hot">🔴 Hot</option>
+          <option value="warm">🟠 Warm</option>
+          <option value="cold">🔵 Cold</option>
+        </select>
+      </div>
+      <div class="filter-group" style="flex-direction:row; gap:8px; align-items:flex-end;">
+        <button class="filter-btn primary" onclick="applyFilters()">Search</button>
+        <button class="filter-btn secondary" onclick="clearFilters()">Clear</button>
+        <button class="filter-btn export" onclick="exportCSV()">Export CSV</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row" id="stats-row">
+      <div class="stat-card total">
+        <div class="stat-label">Total Leads</div>
+        <div class="stat-value" id="s-total">0</div>
+      </div>
+      <div class="stat-card hot">
+        <div class="stat-label">🔴 Hot</div>
+        <div class="stat-value" id="s-hot">0</div>
+      </div>
+      <div class="stat-card warm">
+        <div class="stat-label">🟠 Warm</div>
+        <div class="stat-value" id="s-warm">0</div>
+      </div>
+      <div class="stat-card cold">
+        <div class="stat-label">🔵 Cold</div>
+        <div class="stat-value" id="s-cold">0</div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div id="tab-content-property">
+      <div class="table-wrap">
+        <table class="lead-table" id="property-table">
+          <thead>
+            <tr>
+              <th onclick="sortTable('score')">Score ↕</th>
+              <th>Temp</th>
+              <th onclick="sortTable('saleDate')">Sale Date ↕</th>
+              <th onclick="sortTable('salePrice')">Price ↕</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>Owner</th>
+              <th>Permit</th>
+              <th>GC / Applicant</th>
+              <th>Contact Route</th>
+              <th>Status</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody id="property-tbody">
+            <tr>
+              <td colspan="12">
+                <div class="empty-state">
+                  <div class="empty-icon">📡</div>
+                  <div class="empty-title">No data loaded</div>
+                  <div class="empty-sub">Upload a Property CSV above to begin.<br>Download from papa.miamidade.gov</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tab-content-opportunity" style="display:none">
+      <div id="opp-list">
+        <div class="empty-state">
+          <div class="empty-icon">⚡</div>
+          <div class="empty-title">No opportunities loaded</div>
+          <div class="empty-sub">Upload Opportunities CSV above.<br>Craigslist / job board taraması Faz 2'de aktif olacak.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-content-gc" style="display:none">
+      <div class="table-wrap">
+        <table class="lead-table" id="gc-table">
+          <thead>
+            <tr>
+              <th>Score</th>
+              <th>Temp</th>
+              <th>GC / Architect</th>
+              <th>License No</th>
+              <th>Active Permits</th>
+              <th>Scope</th>
+              <th>Last Permit Date</th>
+              <th>Contact</th>
+              <th>Status</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody id="gc-tbody">
+            <tr>
+              <td colspan="10">
+                <div class="empty-state">
+                  <div class="empty-icon">🏗️</div>
+                  <div class="empty-title">No GC data</div>
+                  <div class="empty-sub">GC leads are extracted automatically from the Permit CSV.<br>Upload a permit file to see active contractors.</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div id="overlay" onclick="closePanel()"></div>
+<div id="detail-panel">
+  <div class="panel-header">
+    <div class="panel-title" id="panel-title">Lead Detail</div>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+</div>
+
+<!-- NOTIFICATION -->
+<div id="notification"></div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────
+const PASSWORD = 'livane2025';
+
+// ── TARGET AREAS ──────────────────────────────────────
+const HOT_AREAS = ['aventura','miami beach','sunny isles','bal harbour','bay harbor','surfside','coral gables','coconut grove','brickell','key biscayne'];
+const WARM_AREAS = ['north miami','miami','fort lauderdale','hallandale','hollywood'];
+
+// ── MATERIAL KEYWORDS ─────────────────────────────────
+const MATERIAL_KEYWORDS = ['marble','terrazzo','stone','hardwood','wood floor','tile','grout','concrete','travertine','limestone','porcelain'];
+const RENOVATION_KEYWORDS = ['renovation','restore','restoration','tlc','make it your own','investor','as-is','as is','fixer','update','outdated','needs work','opportunity','potential'];
+const FLOOR_PERMIT_KEYWORDS = ['floor','tile','terrazzo','marble','stone','hardwood','vinyl','carpet','restoration','polishing'];
+const RENO_PERMIT_KEYWORDS = ['renovation','interior','remodel','improvement','tenant','build-out','buildout'];
+
+// ── DATA STORES ───────────────────────────────────────
+let propertyData = [];
+let permitData = [];
+let opportunityData = [];
+let gcData = [];
+let filteredData = [];
+let currentTab = 'property';
+let sortCol = 'score';
+let sortDir = -1;
+let statusMap = {};
+
+// ── LOGIN ─────────────────────────────────────────────
+function doLogin() {
+  const val = document.getElementById('pw-input').value;
+  if (val === PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    startClock();
+    setDefaultDates();
+    loadFromStorage();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+function doLogout() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('pw-input').value = '';
+}
+
+// ── CLOCK ─────────────────────────────────────────────
+function startClock() {
+  const el = document.getElementById('clock');
+  const tick = () => {
+    const now = new Date();
+    el.textContent = now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) + ' · ' +
+      now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  };
+  tick(); setInterval(tick, 1000);
+}
+
+// ── DEFAULT DATES ─────────────────────────────────────
+function setDefaultDates() {
+  const now = new Date();
+  const past = new Date(); past.setDate(past.getDate() - 30);
+  document.getElementById('f-end').value = now.toISOString().split('T')[0];
+  document.getElementById('f-start').value = past.toISOString().split('T')[0];
+  document.getElementById('f-price').value = '700000';
+}
+
+// ── TABS ──────────────────────────────────────────────
+function switchTab(tab) {
+  currentTab = tab;
+  ['property','opportunity','gc'].forEach(t => {
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+    document.getElementById('tab-content-' + t).style.display = t === tab ? 'block' : 'none';
+  });
+  renderStats();
+}
+
+// ── DRAG & DROP ───────────────────────────────────────
+function dragOver(e, id) { e.preventDefault(); document.getElementById(id).classList.add('drag-over'); }
+function dragLeave(id) { document.getElementById(id).classList.remove('drag-over'); }
+function dropFile(e, type) {
+  e.preventDefault();
+  const id = type === 'property' ? 'zone-property' : type === 'permit' ? 'zone-permit' : 'zone-opp';
+  dragLeave(id);
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file, type);
+}
+
+// ── FILE LOADING ──────────────────────────────────────
+function loadCSV(e, type) { if (e.target.files[0]) processFile(e.target.files[0], type); }
+
+function processFile(file, type) {
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const text = ev.target.result;
+    const rows = parseCSV(text);
+    if (type === 'property') {
+      propertyData = rows.map(processPropertyRow);
+      if (permitData.length) mergePermits();
+      document.getElementById('loaded-property').textContent = '✓ ' + propertyData.length + ' records loaded';
+      filteredData = [...propertyData];
+      renderPropertyTable();
+      renderStats();
+      saveToStorage();
+      notify(propertyData.length + ' properties loaded & scored');
+    } else if (type === 'permit') {
+      permitData = rows;
+      gcData = extractGCLeads(rows);
+      if (propertyData.length) mergePermits();
+      document.getElementById('loaded-permit').textContent = '✓ ' + permitData.length + ' permits · ' + gcData.length + ' GC leads';
+      renderGCTable();
+      renderPropertyTable();
+      renderStats();
+      saveToStorage();
+      notify(permitData.length + ' permits loaded · ' + gcData.length + ' GC leads extracted');
+    } else if (type === 'opportunity') {
+      opportunityData = rows.map(processOpportunityRow);
+      document.getElementById('loaded-opportunity').textContent = '✓ ' + opportunityData.length + ' opportunities loaded';
+      renderOpportunities();
+      renderStats();
+      notify(opportunityData.length + ' opportunities loaded');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ── CSV PARSER ────────────────────────────────────────
+function parseCSV(text) {
+  const lines = text.split('\n').filter(l => l.trim());
+  if (lines.length < 2) return [];
+  const headers = parseCSVLine(lines[0]).map(h => h.trim().toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,''));
+  return lines.slice(1).map(line => {
+    const vals = parseCSVLine(line);
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = (vals[i] || '').trim(); });
+    return obj;
+  }).filter(r => Object.values(r).some(v => v));
+}
+
+function parseCSVLine(line) {
+  const result = []; let cur = ''; let inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { result.push(cur); cur = ''; }
+    else { cur += c; }
+  }
+  result.push(cur);
+  return result;
+}
+
+// ── FIELD NORMALIZER ──────────────────────────────────
+function findField(row, candidates) {
+  for (const c of candidates) {
+    const key = Object.keys(row).find(k => k.includes(c));
+    if (key && row[key]) return row[key];
+  }
+  return '';
+}
+
+// ── PROCESS PROPERTY ROW ──────────────────────────────
+function processPropertyRow(row) {
+  const address = findField(row, ['address','site_addr','property_addr','siteaddress','addr']);
+  const city = findField(row, ['city','municipality','muni','situs_city']);
+  const saleDate = findField(row, ['sale_date','saledate','date_of_sale','sold_date','transfer_date']);
+  const salePrice = parseFloat((findField(row, ['sale_price','saleprice','price','amount','transfer_amount']) || '0').replace(/[^0-9.]/g,'')) || 0;
+  const owner = findField(row, ['owner','owner_name','grantor','buyer','new_owner','owner1']);
+  const ownerMail = findField(row, ['mailing','mail_addr','owner_addr','mail_address']);
+  const propType = findField(row, ['prop_type','property_type','use_code','land_use','dor_code','type']);
+  const yearBuilt = findField(row, ['year_built','yearbuilt','yr_built','year']);
+  const assessed = findField(row, ['assessed','assess_val','just_value','market_value','just_val']);
+  const folio = findField(row, ['folio','folio_num','parcel','parcel_id','parcel_num']);
+
+  const score = scoreProperty({ city, saleDate, salePrice, propType, yearBuilt, owner, ownerMail });
+  const temp = score >= 15 ? 'hot' : score >= 8 ? 'warm' : 'cold';
+  const materialSignal = detectMaterialSignal({ propType, yearBuilt, city });
+  const contactRoute = bestContactRoute({ owner, ownerMail });
+
+  return {
+    id: folio || address + saleDate,
+    address, city, saleDate, salePrice, owner, ownerMail, propType,
+    yearBuilt, assessed, folio, score, temp, materialSignal, contactRoute,
+    permitFound: false, permitScope: '', gcName: '', architectName: '',
+    realtorName: '', realtorPhone: '',
+    recommendedAction: buildPropertyAction({ temp, city, salePrice, materialSignal, contactRoute })
+  };
+}
+
+// ── SCORING ───────────────────────────────────────────
+function scoreProperty({ city, saleDate, salePrice, propType, yearBuilt, owner, ownerMail }) {
+  let score = 0;
+  const cityL = (city || '').toLowerCase();
+  const typeL = (propType || '').toLowerCase();
+  const year = parseInt(yearBuilt) || 0;
+
+  // Location
+  if (HOT_AREAS.some(a => cityL.includes(a))) score += 3;
+  else if (WARM_AREAS.some(a => cityL.includes(a))) score += 1;
+
+  // Price
+  if (salePrice >= 2000000) score += 5;
+  else if (salePrice >= 1000000) score += 4;
+  else if (salePrice >= 700000) score += 2;
+
+  // Recency
+  if (saleDate) {
+    const d = new Date(saleDate);
+    const days = (Date.now() - d) / 86400000;
+    if (days <= 30) score += 5;
+    else if (days <= 60) score += 4;
+    else if (days <= 90) score += 3;
+    else if (days <= 180) score += 1;
+  }
+
+  // Property type signals
+  if (typeL.includes('condo') || typeL.includes('apartment')) score += 2;
+  if (typeL.includes('luxury') || typeL.includes('waterfront') || typeL.includes('penthouse')) score += 2;
+
+  // Building age (terrazzo/marble likelihood)
+  if (year > 0 && year <= 1980) score += 2;
+  else if (year > 1980 && year <= 2000) score += 1;
+
+  // Owner LLC signal
+  if ((owner || '').match(/LLC|INC|CORP|TRUST|LTD/i)) score += 1;
+
+  // Contact availability
+  if (ownerMail) score += 1;
+
+  return score;
+}
+
+// ── MATERIAL SIGNAL ───────────────────────────────────
+function detectMaterialSignal({ propType, yearBuilt, city }) {
+  const year = parseInt(yearBuilt) || 0;
+  const cityL = (city || '').toLowerCase();
+  const signals = [];
+
+  if (year > 0 && year <= 1975) signals.push('Terrazzo likely (pre-1975)');
+  else if (year <= 1990) signals.push('Marble/terrazzo possible');
+
+  if (HOT_AREAS.some(a => cityL.includes(a))) signals.push('Luxury area — marble/stone expected');
+
+  const typeL = (propType || '').toLowerCase();
+  if (typeL.includes('condo') && year <= 1985) signals.push('Vintage condo — original floors likely intact');
+
+  return signals.join(' · ') || 'No strong material signal';
+}
+
+// ── CONTACT ROUTE ─────────────────────────────────────
+function bestContactRoute({ owner, ownerMail }) {
+  const routes = [];
+  if (ownerMail) routes.push('Owner mailing ✓');
+  routes.push('Realtor lookup needed');
+  routes.push('HOA check recommended');
+  return routes[0] || 'Manual lookup needed';
+}
+
+// ── ACTION BUILDER ────────────────────────────────────
+function buildPropertyAction({ temp, city, salePrice, materialSignal, contactRoute }) {
+  if (temp === 'hot') {
+    return `High-value recent sale in ${city}. ${materialSignal}. Contact realtor/owner immediately. Lead with NSU Art Museum reference.`;
+  } else if (temp === 'warm') {
+    return `Good potential in ${city}. Look up listing agent on Zillow/Realtor.com. Check for material signals in listing photos.`;
+  }
+  return `Lower priority. Monitor for permit activity. Add to follow-up list.`;
+}
+
+// ── MERGE PERMITS ─────────────────────────────────────
+function mergePermits() {
+  const permitMap = {};
+  permitData.forEach(p => {
+    const addr = (findField(p, ['address','site_addr','job_addr','property_addr']) || '').toLowerCase().trim();
+    if (addr) {
+      if (!permitMap[addr]) permitMap[addr] = [];
+      permitMap[addr].push(p);
+    }
+  });
+
+  propertyData = propertyData.map(prop => {
+    const addrKey = (prop.address || '').toLowerCase().trim().split(',')[0];
+    const matches = Object.keys(permitMap).filter(k => k.includes(addrKey) || addrKey.includes(k.split(' ')[0]));
+    if (matches.length > 0) {
+      const permits = permitMap[matches[0]];
+      const latestPermit = permits[0];
+      const scope = findField(latestPermit, ['work_description','description','scope','permit_type','work_type']) || '';
+      const gc = findField(latestPermit, ['contractor','gc_name','applicant','contractor_name','company_name']) || '';
+      const arch = findField(latestPermit, ['architect','designer','architect_name']) || '';
+
+      const scopeL = scope.toLowerCase();
+      const isFloorPermit = FLOOR_PERMIT_KEYWORDS.some(k => scopeL.includes(k));
+      const isRenoPermit = RENO_PERMIT_KEYWORDS.some(k => scopeL.includes(k));
+
+      let bonusScore = 0;
+      if (isFloorPermit) bonusScore += 4;
+      else if (isRenoPermit) bonusScore += 3;
+      bonusScore += 3; // permit found bonus
+      if (gc) bonusScore += 3;
+
+      const newScore = prop.score + bonusScore;
+      const newTemp = newScore >= 15 ? 'hot' : newScore >= 8 ? 'warm' : 'cold';
+
+      return {
+        ...prop,
+        permitFound: true,
+        permitScope: scope,
+        gcName: gc,
+        architectName: arch,
+        score: newScore,
+        temp: newTemp,
+        contactRoute: gc ? `GC: ${gc}` : prop.contactRoute
+      };
+    }
+    return prop;
+  });
+
+  filteredData = [...propertyData];
+}
+
+// ── EXTRACT GC LEADS ──────────────────────────────────
+function extractGCLeads(permits) {
+  const gcMap = {};
+  permits.forEach(p => {
+    const gc = findField(p, ['contractor','gc_name','applicant','contractor_name','company_name']);
+    const license = findField(p, ['license','license_no','cert_no','contractor_license']);
+    const scope = findField(p, ['work_description','description','scope','permit_type']);
+    const date = findField(p, ['issue_date','permit_date','date','issued_date']);
+    if (!gc) return;
+    const key = gc.toLowerCase().trim();
+    if (!gcMap[key]) gcMap[key] = { name: gc, license, scopes: [], dates: [], permits: 0 };
+    gcMap[key].permits++;
+    if (scope) gcMap[key].scopes.push(scope);
+    if (date) gcMap[key].dates.push(date);
+  });
+
+  return Object.values(gcMap).map(gc => {
+    const scopeStr = [...new Set(gc.scopes)].slice(0, 3).join(', ');
+    const lastDate = gc.dates.sort().reverse()[0] || '';
+    let score = 0;
+    if (gc.permits >= 5) score += 5;
+    else if (gc.permits >= 2) score += 3;
+    else score += 1;
+    const scopeL = scopeStr.toLowerCase();
+    if (FLOOR_PERMIT_KEYWORDS.some(k => scopeL.includes(k))) score += 4;
+    if (RENO_PERMIT_KEYWORDS.some(k => scopeL.includes(k))) score += 3;
+    const temp = score >= 8 ? 'hot' : score >= 5 ? 'warm' : 'cold';
+    return { name: gc.name, license: gc.license, activePermits: gc.permits, scope: scopeStr, lastDate, score, temp };
+  }).sort((a, b) => b.score - a.score);
+}
+
+// ── OPPORTUNITY PROCESSING ────────────────────────────
+function processOpportunityRow(row) {
+  const source = findField(row, ['source','platform','site']);
+  const title = findField(row, ['title','description','job_title','name']);
+  const location = findField(row, ['location','city','area','address']);
+  const link = findField(row, ['link','url','href']);
+  const contact = findField(row, ['contact','phone','email','poster']);
+  const urgency = findField(row, ['urgency','priority','status']);
+
+  let score = 0;
+  const titleL = (title || '').toLowerCase();
+  if (FLOOR_PERMIT_KEYWORDS.some(k => titleL.includes(k))) score += 5;
+  if (RENO_PERMIT_KEYWORDS.some(k => titleL.includes(k))) score += 4;
+  if (titleL.includes('sub') || titleL.includes('subcontractor')) score += 5;
+  if (titleL.includes('needed') || titleL.includes('wanted') || titleL.includes('hiring')) score += 3;
+  if (contact) score += 3;
+  const locL = (location || '').toLowerCase();
+  if (HOT_AREAS.some(a => locL.includes(a))) score += 3;
+
+  const temp = score >= 12 ? 'hot' : score >= 6 ? 'warm' : 'cold';
+  return { source, title, location, link, contact, urgency, score, temp };
+}
+
+// ── RENDER PROPERTY TABLE ─────────────────────────────
+function renderPropertyTable() {
+  const tbody = document.getElementById('property-tbody');
+  const data = filteredData.length ? filteredData : propertyData;
+
+  if (!data.length) {
+    tbody.innerHTML = `<tr><td colspan="12"><div class="empty-state"><div class="empty-icon">📡</div><div class="empty-title">No data loaded</div><div class="empty-sub">Upload a Property CSV above to begin.<br>Download from papa.miamidade.gov</div></div></td></tr>`;
+    return;
+  }
+
+  const sorted = [...data].sort((a, b) => (a[sortCol] > b[sortCol] ? 1 : -1) * sortDir);
+
+  tbody.innerHTML = sorted.map((lead, i) => {
+    const price = lead.salePrice ? '$' + lead.salePrice.toLocaleString() : '—';
+    const date = lead.saleDate ? new Date(lead.saleDate).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—';
+    const status = statusMap[lead.id] || 'new';
+    const hasContact = lead.contactRoute && !lead.contactRoute.includes('needed');
+    const permitBadge = lead.permitFound
+      ? `<span class="permit-yes">✓ ${lead.permitScope ? lead.permitScope.substring(0,20) + (lead.permitScope.length > 20 ? '…' : '') : 'Permit found'}</span>`
+      : `<span class="permit-no">—</span>`;
+
+    return `<tr>
+      <td><span class="score-pill">${lead.score}</span></td>
+      <td><span class="temp-badge ${lead.temp}"><span class="temp-dot"></span>${lead.temp.toUpperCase()}</span></td>
+      <td style="color:var(--muted)">${date}</td>
+      <td style="font-weight:600">${price}</td>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">${lead.address || '—'}</td>
+      <td>${lead.city || '—'}</td>
+      <td style="color:var(--muted);max-width:140px;overflow:hidden;text-overflow:ellipsis">${lead.owner || '—'}</td>
+      <td>${permitBadge}</td>
+      <td style="color:var(--muted)">${lead.gcName ? lead.gcName.substring(0,20) + (lead.gcName.length > 20 ? '…' : '') : '—'}</td>
+      <td><span class="contact-badge ${hasContact ? 'has-contact' : ''}">${(lead.contactRoute || 'Lookup needed').substring(0,22)}</span></td>
+      <td>
+        <select class="status-select" onchange="updateStatus('${lead.id}', this.value)">
+          <option value="new" ${status==='new'?'selected':''}>New</option>
+          <option value="contacted" ${status==='contacted'?'selected':''}>Contacted</option>
+          <option value="qualified" ${status==='qualified'?'selected':''}>Qualified</option>
+          <option value="proposal" ${status==='proposal'?'selected':''}>Proposal</option>
+          <option value="closed" ${status==='closed'?'selected':''}>Closed</option>
+          <option value="skip" ${status==='skip'?'selected':''}>Skip</option>
+        </select>
+      </td>
+      <td><button class="detail-btn" onclick="openPropertyDetail(${i})">View →</button></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('cnt-property').textContent = data.length;
+}
+
+// ── RENDER GC TABLE ───────────────────────────────────
+function renderGCTable() {
+  const tbody = document.getElementById('gc-tbody');
+  if (!gcData.length) {
+    tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state"><div class="empty-icon">🏗️</div><div class="empty-title">No GC data</div><div class="empty-sub">Upload a Permit CSV to extract GC leads.</div></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = gcData.map((gc, i) => {
+    const date = gc.lastDate ? new Date(gc.lastDate).toLocaleDateString('en-US',{month:'short',year:'numeric'}) : '—';
+    const status = statusMap['gc-' + i] || 'new';
+    return `<tr>
+      <td><span class="score-pill">${gc.score}</span></td>
+      <td><span class="temp-badge ${gc.temp}"><span class="temp-dot"></span>${gc.temp.toUpperCase()}</span></td>
+      <td style="font-weight:600">${gc.name}</td>
+      <td style="color:var(--muted)">${gc.license || '—'}</td>
+      <td style="text-align:center">${gc.activePermits}</td>
+      <td style="color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis">${gc.scope || '—'}</td>
+      <td style="color:var(--muted)">${date}</td>
+      <td><span class="contact-badge">License lookup</span></td>
+      <td>
+        <select class="status-select" onchange="updateStatus('gc-${i}', this.value)">
+          <option value="new" ${status==='new'?'selected':''}>New</option>
+          <option value="contacted" ${status==='contacted'?'selected':''}>Contacted</option>
+          <option value="qualified" ${status==='qualified'?'selected':''}>Qualified</option>
+          <option value="skip" ${status==='skip'?'selected':''}>Skip</option>
+        </select>
+      </td>
+      <td><button class="detail-btn" onclick="openGCDetail(${i})">View →</button></td>
+    </tr>`;
+  }).join('');
+  document.getElementById('cnt-gc').textContent = gcData.length;
+}
+
+// ── RENDER OPPORTUNITIES ──────────────────────────────
+function renderOpportunities() {
+  const el = document.getElementById('opp-list');
+  if (!opportunityData.length) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">⚡</div><div class="empty-title">No opportunities loaded</div><div class="empty-sub">Upload Opportunities CSV or wait for Faz 2 auto-scan.</div></div>`;
+    return;
+  }
+  const sorted = [...opportunityData].sort((a, b) => b.score - a.score);
+  el.innerHTML = sorted.map(opp => `
+    <div class="opp-card ${opp.temp}">
+      <div class="opp-top">
+        <div>
+          <div class="opp-source">${opp.source || 'Unknown source'}</div>
+          <div class="opp-title">${opp.title || 'Untitled opportunity'}</div>
+        </div>
+        <span class="temp-badge ${opp.temp}"><span class="temp-dot"></span>${opp.temp.toUpperCase()} · ${opp.score}pts</span>
+      </div>
+      <div class="opp-meta">
+        <span class="opp-tag">📍 ${opp.location || 'Location TBD'}</span>
+        ${opp.urgency ? `<span class="opp-tag">⚡ ${opp.urgency}</span>` : ''}
+        ${opp.contact ? `<span class="opp-tag" style="color:var(--green)">📞 Contact available</span>` : ''}
+      </div>
+      ${opp.link ? `<div style="font-size:10px;color:var(--muted);margin-bottom:8px"><a href="${opp.link}" target="_blank" style="color:var(--cyan)">${opp.link}</a></div>` : ''}
+      <div class="opp-action">→ ${opp.temp === 'hot' ? 'Contact immediately — high match for Livane services' : opp.temp === 'warm' ? 'Follow up within 24h — good service fit' : 'Low priority — monitor'}</div>
+    </div>
+  `).join('');
+  document.getElementById('cnt-opportunity').textContent = opportunityData.length;
+}
+
+// ── STATS ─────────────────────────────────────────────
+function renderStats() {
+  let data = currentTab === 'property' ? filteredData : currentTab === 'gc' ? gcData : opportunityData;
+  if (!data.length && currentTab === 'property') data = propertyData;
+  const hot = data.filter(d => d.temp === 'hot').length;
+  const warm = data.filter(d => d.temp === 'warm').length;
+  const cold = data.filter(d => d.temp === 'cold').length;
+  document.getElementById('s-total').textContent = data.length;
+  document.getElementById('s-hot').textContent = hot;
+  document.getElementById('s-warm').textContent = warm;
+  document.getElementById('s-cold').textContent = cold;
+}
+
+// ── FILTERS ───────────────────────────────────────────
+function applyFilters() {
+  const start = document.getElementById('f-start').value;
+  const end = document.getElementById('f-end').value;
+  const city = document.getElementById('f-city').value.toLowerCase();
+  const minPrice = parseFloat(document.getElementById('f-price').value) || 0;
+  const temp = document.getElementById('f-temp').value;
+
+  filteredData = propertyData.filter(lead => {
+    if (city && !(lead.city || '').toLowerCase().includes(city)) return false;
+    if (minPrice && lead.salePrice < minPrice) return false;
+    if (temp && lead.temp !== temp) return false;
+    if (start && lead.saleDate && lead.saleDate < start) return false;
+    if (end && lead.saleDate && lead.saleDate > end) return false;
+    return true;
+  });
+
+  renderPropertyTable();
+  renderStats();
+}
+
+function clearFilters() {
+  setDefaultDates();
+  document.getElementById('f-city').value = '';
+  document.getElementById('f-temp').value = '';
+  filteredData = [...propertyData];
+  renderPropertyTable();
+  renderStats();
+}
+
+// ── SORT ──────────────────────────────────────────────
+function sortTable(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = -1; }
+  renderPropertyTable();
+}
+
+// ── STATUS ────────────────────────────────────────────
+function updateStatus(id, val) {
+  statusMap[id] = val;
+  saveToStorage();
+}
+
+// ── DETAIL PANEL — PROPERTY ───────────────────────────
+function openPropertyDetail(i) {
+  const data = (filteredData.length ? filteredData : propertyData);
+  const sorted = [...data].sort((a, b) => (a[sortCol] > b[sortCol] ? 1 : -1) * sortDir);
+  const lead = sorted[i];
+  if (!lead) return;
+
+  const price = lead.salePrice ? '$' + lead.salePrice.toLocaleString() : '—';
+  const tempColor = lead.temp === 'hot' ? 'hot' : lead.temp === 'warm' ? 'warm' : '';
+
+  document.getElementById('panel-title').textContent = lead.address || 'Property Detail';
+  document.getElementById('panel-body').innerHTML = `
+    <div class="panel-section">
+      <div class="panel-section-title">Score & Temperature</div>
+      <div class="panel-row"><span class="panel-key">Score</span><span class="panel-val highlight">${lead.score} points</span></div>
+      <div class="panel-row"><span class="panel-key">Temperature</span><span class="panel-val ${tempColor}">${lead.temp.toUpperCase()}</span></div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-title">Property Info</div>
+      <div class="panel-row"><span class="panel-key">Address</span><span class="panel-val">${lead.address || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">City</span><span class="panel-val">${lead.city || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Sale Date</span><span class="panel-val">${lead.saleDate || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Sale Price</span><span class="panel-val highlight">${price}</span></div>
+      <div class="panel-row"><span class="panel-key">Property Type</span><span class="panel-val">${lead.propType || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Year Built</span><span class="panel-val">${lead.yearBuilt || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Assessed Value</span><span class="panel-val">${lead.assessed || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Folio</span><span class="panel-val" style="color:var(--muted)">${lead.folio || '—'}</span></div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-title">Owner & Contact</div>
+      <div class="panel-row"><span class="panel-key">Owner</span><span class="panel-val">${lead.owner || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Mailing Address</span><span class="panel-val">${lead.ownerMail || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Best Contact Route</span><span class="panel-val green">${lead.contactRoute || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Realtor</span><span class="panel-val">${lead.realtorName || 'Lookup on Zillow/Realtor.com'}</span></div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-title">Permit & GC</div>
+      <div class="panel-row"><span class="panel-key">Permit Found</span><span class="panel-val ${lead.permitFound ? 'green' : ''}">${lead.permitFound ? '✓ Yes' : 'No permit on record'}</span></div>
+      <div class="panel-row"><span class="panel-key">Permit Scope</span><span class="panel-val">${lead.permitScope || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">GC / Contractor</span><span class="panel-val highlight">${lead.gcName || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Architect</span><span class="panel-val">${lead.architectName || '—'}</span></div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-title">Material & Service Signal</div>
+      <div class="panel-row"><span class="panel-key">Material Signal</span><span class="panel-val">${lead.materialSignal || '—'}</span></div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-title">Recommended Action</div>
+      <div class="action-box">${lead.recommendedAction || '—'}</div>
+    </div>
+  `;
+
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('detail-panel').classList.add('open');
+}
+
+// ── DETAIL PANEL — GC ─────────────────────────────────
+function openGCDetail(i) {
+  const gc = gcData[i];
+  if (!gc) return;
+  document.getElementById('panel-title').textContent = gc.name;
+  document.getElementById('panel-body').innerHTML = `
+    <div class="panel-section">
+      <div class="panel-section-title">Score & Temperature</div>
+      <div class="panel-row"><span class="panel-key">Score</span><span class="panel-val highlight">${gc.score} points</span></div>
+      <div class="panel-row"><span class="panel-key">Temperature</span><span class="panel-val ${gc.temp === 'hot' ? 'hot' : gc.temp === 'warm' ? 'warm' : ''}">${gc.temp.toUpperCase()}</span></div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-title">Contractor Info</div>
+      <div class="panel-row"><span class="panel-key">Company Name</span><span class="panel-val">${gc.name}</span></div>
+      <div class="panel-row"><span class="panel-key">License No</span><span class="panel-val highlight">${gc.license || 'Check DBPR'}</span></div>
+      <div class="panel-row"><span class="panel-key">Active Permits</span><span class="panel-val">${gc.activePermits}</span></div>
+      <div class="panel-row"><span class="panel-key">Scope of Work</span><span class="panel-val">${gc.scope || '—'}</span></div>
+      <div class="panel-row"><span class="panel-key">Last Permit Date</span><span class="panel-val">${gc.lastDate || '—'}</span></div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-title">How to Contact</div>
+      <div class="action-box">Look up ${gc.name} on Florida DBPR license search (myfloridalicense.com) to find phone and email. Then contact: "We saw your active permits in Miami-Dade — we offer floor restoration, marble/terrazzo work, and door installation as a reliable sub. NSU Art Museum reference available."</div>
+    </div>
+    <div class="panel-section">
+      <div class="panel-section-title">Recommended Action</div>
+      <div class="action-box">${gc.temp === 'hot' ? 'High-volume GC with relevant scope. Contact this week. Position Livane as reliable specialty sub.' : gc.temp === 'warm' ? 'Active GC. Reach out within 2 weeks with portfolio.' : 'Low activity. Add to list and monitor.'}</div>
+    </div>
+  `;
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('detail-panel').classList.add('open');
+}
+
+function closePanel() {
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('detail-panel').classList.remove('open');
+}
+
+// ── EXPORT CSV ────────────────────────────────────────
+function exportCSV() {
+  const data = currentTab === 'property' ? (filteredData.length ? filteredData : propertyData) : gcData;
+  if (!data.length) { notify('No data to export'); return; }
+
+  const headers = currentTab === 'property'
+    ? ['Score','Temperature','Sale Date','Sale Price','Address','City','Owner','Owner Mailing','Property Type','Year Built','Permit Found','Permit Scope','GC Name','Material Signal','Contact Route','Recommended Action']
+    : ['Score','Temperature','GC Name','License','Active Permits','Scope','Last Date'];
+
+  const rows = data.map(d => currentTab === 'property'
+    ? [d.score, d.temp, d.saleDate, d.salePrice, d.address, d.city, d.owner, d.ownerMail, d.propType, d.yearBuilt, d.permitFound, d.permitScope, d.gcName, d.materialSignal, d.contactRoute, d.recommendedAction]
+    : [d.score, d.temp, d.name, d.license, d.activePermits, d.scope, d.lastDate]
+  );
+
+  const csv = [headers, ...rows].map(r => r.map(v => `"${(v||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url;
+  a.download = `livane-leads-${new Date().toISOString().split('T')[0]}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+  notify('CSV exported successfully');
+}
+
+// ── STORAGE ───────────────────────────────────────────
+function saveToStorage() {
+  try {
+    localStorage.setItem('lr-status', JSON.stringify(statusMap));
+    localStorage.setItem('lr-property', JSON.stringify(propertyData));
+    localStorage.setItem('lr-gc', JSON.stringify(gcData));
+    localStorage.setItem('lr-opp', JSON.stringify(opportunityData));
+  } catch(e) {}
+}
+
+function loadFromStorage() {
+  try {
+    const s = localStorage.getItem('lr-status'); if (s) statusMap = JSON.parse(s);
+    const p = localStorage.getItem('lr-property'); if (p) { propertyData = JSON.parse(p); filteredData = [...propertyData]; renderPropertyTable(); renderStats(); document.getElementById('loaded-property').textContent = '✓ ' + propertyData.length + ' records (cached)'; }
+    const g = localStorage.getItem('lr-gc'); if (g) { gcData = JSON.parse(g); renderGCTable(); document.getElementById('loaded-permit').textContent = '✓ ' + gcData.length + ' GC leads (cached)'; }
+    const o = localStorage.getItem('lr-opp'); if (o) { opportunityData = JSON.parse(o); renderOpportunities(); }
+  } catch(e) {}
+}
+
+// ── NOTIFICATION ──────────────────────────────────────
+function notify(msg) {
+  const el = document.getElementById('notification');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
