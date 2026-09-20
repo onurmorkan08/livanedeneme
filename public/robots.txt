@@ -1,0 +1,41 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /lead-radar
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /lead-radar
+
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /lead-radar
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /lead-radar
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /lead-radar
+
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /lead-radar
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /lead-radar
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /lead-radar
+
+Sitemap: https://www.livanerenovation.com/sitemap.xml

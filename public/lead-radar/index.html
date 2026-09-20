@@ -707,7 +707,6 @@
   ::-webkit-scrollbar-thumb { background: var(--border2); }
   ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 </style>
-  <link rel="stylesheet" href="./art.css" />
 </head>
 <body>
 
@@ -1625,6 +1624,5 @@ function notify(msg) {
   setTimeout(() => el.classList.remove('show'), 3000);
 }
 </script>
-  <script src="./art.js"></script>
-</body>
+<script>document.querySelectorAll("form").forEach(f=>f.addEventListener("submit",e=>{e.preventDefault();alert("Offline preview: forms are disabled.")}))</script></body>
 </html>

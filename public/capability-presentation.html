@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livane Renovation | Commercial Capability Presentation</title>
+  <meta name="description" content="Renovation, floor restoration, interior door installation, millwork, and project support for South Florida homes, managed properties, and development projects.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="./livane_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #080f1a; color: #f0f4ff; line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* -- Tokens -- */
+    :root {
+      --bg: #080f1a;
+      --card: #0f1e35;
+      --border: rgba(255,255,255,.07);
+      --gold: #c9a96e;
+      --gold-dim: rgba(201,169,110,.12);
+      --white: #fff;
+      --muted: rgba(240,244,255,.55);
+      --font-h: 'Outfit', sans-serif;
+    }
+
+    .cp-wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── HERO ── */
+    .cp-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #080f1a 0%, #0d1b2e 40%, #112340 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 0;
+    }
+    .cp-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(201,169,110,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cp-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .cp-hero-logo { width: 220px; margin-bottom: 2.5rem; object-fit: contain; }
+    .cp-hero h1 {
+      font-family: var(--font-h);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .cp-hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+    .cp-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+    .cp-chip {
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,169,110,.25);
+      color: var(--gold);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .45rem 1rem;
+      border-radius: 100px;
+      letter-spacing: .04em;
+    }
+    .cp-hero-url {
+      font-size: .85rem;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: .02em;
+    }
+    .cp-hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cp-hero-graphic {
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 1;
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(201,169,110,.08), rgba(74,158,255,.05));
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+    }
+    .cp-hero-graphic img { width: 100%; object-fit: contain; }
+
+    /* ── WHO WE ARE ── */
+    .cp-who {
+      padding: 6rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .cp-label {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .cp-section-title {
+      font-family: var(--font-h);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .cp-section-text {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ── SERVICE CARDS ── */
+    .cp-services {
+      padding: 5rem 0 6rem;
+    }
+    .cp-services-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .cp-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .cp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.25rem 2rem;
+      transition: border-color .3s;
+    }
+    .cp-card:hover { border-color: rgba(201,169,110,.25); }
+    .cp-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: var(--gold-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .cp-card-icon svg { width: 24px; height: 24px; color: var(--gold); }
+    .cp-card h3 {
+      font-family: var(--font-h);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .65rem;
+    }
+    .cp-card p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── INTERIOR FINISH ── */
+    .cp-finish {
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .cp-finish-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .cp-check-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; margin-top: 1.5rem; }
+    .cp-check-list li {
+      font-size: .9rem;
+      color: rgba(240,244,255,.7);
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+    }
+    .cp-check-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── FLOOR RESTORATION ── */
+    .cp-floors {
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── HIGH-RISE ── */
+    .cp-highrise {
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .cp-fit-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .cp-fit-card {
+      background: rgba(201,169,110,.04);
+      border: 1px solid rgba(201,169,110,.12);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      font-size: .88rem;
+      color: rgba(240,244,255,.7);
+      line-height: 1.5;
+    }
+
+    /* ── PROCESS ── */
+    .cp-process {
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .cp-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .cp-step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+    }
+    .cp-step-num {
+      font-family: var(--font-h);
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(201,169,110,.25);
+      margin-bottom: .75rem;
+    }
+    .cp-step h4 {
+      font-family: var(--font-h);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .5rem;
+    }
+    .cp-step p {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── CTA ── */
+    .cp-cta {
+      padding: 6rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--bg), #0d1b2e);
+    }
+    .cp-cta-logo { width: 180px; margin: 0 auto 2.5rem; object-fit: contain; }
+    .cp-cta-contact {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+    }
+    .cp-cta-contact a {
+      color: var(--gold);
+      font-size: .95rem;
+      font-weight: 500;
+    }
+    .cp-cta-contact span {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .cp-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .cp-hero-visual { display: none; }
+      .cp-cards { grid-template-columns: repeat(2, 1fr); }
+      .cp-fit-cards { grid-template-columns: repeat(2, 1fr); }
+      .cp-steps { grid-template-columns: repeat(2, 1fr); }
+      .cp-finish-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .cp-wrap { padding: 0 1.25rem; }
+      .cp-cards { grid-template-columns: 1fr; }
+      .cp-fit-cards { grid-template-columns: 1fr; }
+      .cp-steps { grid-template-columns: 1fr; }
+      .cp-hero { min-height: auto; padding: 6rem 0 3rem; }
+      .cp-hero-logo { width: 160px; }
+    }
+  </style>
+  <link rel="stylesheet" href="./art.css" />
+<link rel="stylesheet" href="./v71-site.css"></head>
+<body class="v71-page">
+
+  <!-- ══ HERO ══ -->
+  <section class="cp-hero">
+    <div class="cp-wrap cp-hero-inner">
+      <div>
+        <img src="./livane_logo.png" alt="Livane Renovation" class="cp-hero-logo">
+        <h1>Renovation &amp; Surface Restoration Support</h1>
+        <p class="cp-hero-sub">Specialized field support for homeowners, property teams, developers, builders, and high-detail projects in South Florida.</p>
+        <div class="cp-chips">
+          <span class="cp-chip">Floor Restoration</span>
+          <span class="cp-chip">Interior Door Installation</span>
+          <span class="cp-chip">Millwork</span>
+          <span class="cp-chip">Project Support Crews</span>
+        </div>
+        <a href="https://www.livanerenovation.com" class="cp-hero-url">www.livanerenovation.com</a>
+      </div>
+      <div class="cp-hero-visual">
+        <div class="cp-hero-graphic">
+          <img src="./livane_logo.png" alt="Livane Renovation" style="object-fit:contain;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHO WE ARE ══ -->
+  <section class="cp-who">
+    <div class="cp-wrap">
+      <p class="cp-label">Who We Are</p>
+      <h2 class="cp-section-title">A renovation partner,<br>not a generic vendor.</h2>
+      <p class="cp-section-text">Livane Renovation supports homes, businesses, and managed properties through restoration, remodeling, interior finish scopes, and practical project support. Our focus is clear scope definition, dependable field execution, and visible improvement.</p>
+    </div>
+  </section>
+
+  <!-- ══ CORE SERVICES ══ -->
+  <section class="cp-services">
+    <div class="cp-wrap">
+      <div class="cp-services-header">
+        <p class="cp-label">Core Services</p>
+        <h2 class="cp-section-title">What We Deliver</h2>
+      </div>
+      <div class="cp-cards">
+
+        <div class="cp-card">
+          <div class="cp-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg>
+          </div>
+          <h3>Floor Restoration</h3>
+          <p>Concrete, terrazzo, marble, stone, tile &amp; grout restoration, polishing, sealing, adhesive removal, and surface preparation.</p>
+        </div>
+
+        <div class="cp-card">
+          <div class="cp-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M15 2v20"/><circle cx="13" cy="12" r="1" fill="currentColor"/></svg>
+          </div>
+          <h3>Interior Door Installation</h3>
+          <p>Commercial door installation support, door adjustments, hardware coordination, and punch-list correction.</p>
+        </div>
+
+        <div class="cp-card">
+          <div class="cp-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20V4h4v16M10 8h10v12H10"/><path d="M14 12h2M14 15h2"/></svg>
+          </div>
+          <h3>Millwork &amp; Finish Carpentry</h3>
+          <p>Trim, casing, casework, selected millwork installation, and finish-stage field support.</p>
+        </div>
+
+        <div class="cp-card">
+          <div class="cp-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 21v-2a5 5 0 0110 0v2M14 21v-1.5a4 4 0 016 0V21"/></svg>
+          </div>
+          <h3>Project Support Crews</h3>
+          <p>Supplemental labor, corrective work, multi-scope support, and schedule-sensitive jobsite execution.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ INTERIOR FINISH SUPPORT ══ -->
+  <section class="cp-finish">
+    <div class="cp-wrap">
+      <div class="cp-finish-grid">
+        <div>
+          <p class="cp-label">Interior Finish</p>
+          <h2 class="cp-section-title">Doors, millwork and finish-stage execution.</h2>
+          <p class="cp-section-text" style="margin:0">For large projects, our value is not limited to one trade. We can support interior door installation, door adjustments, millwork, trim, casework, corrective field work, and punch-list completion.</p>
+        </div>
+        <ul class="cp-check-list">
+          <li>Interior door installation</li>
+          <li>Door adjustment and hardware support</li>
+          <li>Millwork installation support</li>
+          <li>Trim, casing and finish carpentry</li>
+          <li>Punch-list correction</li>
+          <li>Supplemental field crews</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FLOOR & SURFACE RESTORATION ══ -->
+  <section class="cp-floors">
+    <div class="cp-wrap">
+      <div class="cp-finish-grid">
+        <div>
+          <p class="cp-label">Surface Restoration</p>
+          <h2 class="cp-section-title">Specialty surface restoration for serious properties.</h2>
+          <p class="cp-section-text" style="margin:0">We restore worn, dull, stained, adhesive-covered, or unfinished commercial floors through mechanical preparation, polishing, honing, sealing, and surface correction.</p>
+        </div>
+        <ul class="cp-check-list">
+          <li>Concrete polishing</li>
+          <li>Terrazzo restoration</li>
+          <li>Marble and stone polishing</li>
+          <li>Tile and grout deep cleaning</li>
+          <li>Adhesive and glue removal</li>
+          <li>Floor sealing and protection</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HIGH-RISE / LARGE PROJECT SUPPORT ══ -->
+  <section class="cp-highrise">
+    <div class="cp-wrap">
+      <p class="cp-label">Large Project Support</p>
+      <h2 class="cp-section-title">Support capability for large-scale<br>development projects.</h2>
+      <p class="cp-section-text">For high-rise residential, hospitality, commercial, and mixed-use projects, Livane Renovation can support finish-stage scopes, surface restoration, interior improvements, corrective work, and supplemental crew needs without disrupting existing contractor relationships.</p>
+      <div class="cp-fit-cards">
+        <div class="cp-fit-card">High-rise residential and mixed-use projects</div>
+        <div class="cp-fit-card">Commercial interiors and common areas</div>
+        <div class="cp-fit-card">Lobbies, corridors, amenity spaces, and back-of-house areas</div>
+        <div class="cp-fit-card">Finish-stage support for developers and contractors</div>
+        <div class="cp-fit-card">Property improvement work for owners, managers, and project teams</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROCESS ══ -->
+  <section class="cp-process">
+    <div class="cp-wrap">
+      <div style="text-align:center;margin-bottom:1rem;">
+        <p class="cp-label">How We Work</p>
+        <h2 class="cp-section-title">Clear scope. Reliable crew. Professional finish.</h2>
+      </div>
+      <div class="cp-steps">
+        <div class="cp-step">
+          <div class="cp-step-num">01</div>
+          <h4>Site Walk / Photo Review</h4>
+          <p>We review photos, square footage, conditions, access, and project needs.</p>
+        </div>
+        <div class="cp-step">
+          <div class="cp-step-num">02</div>
+          <h4>Scope Definition</h4>
+          <p>We define the right scope before pricing or crew planning.</p>
+        </div>
+        <div class="cp-step">
+          <div class="cp-step-num">03</div>
+          <h4>Crew Planning</h4>
+          <p>We plan manpower, access, schedule, materials, and field execution.</p>
+        </div>
+        <div class="cp-step">
+          <div class="cp-step-num">04</div>
+          <h4>Execution &amp; Closeout</h4>
+          <p>We complete the work with communication, jobsite awareness, and punch-list discipline.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FINAL CTA ══ -->
+  <section class="cp-cta">
+    <div class="cp-wrap">
+      <img src="./livane_logo.png" alt="Livane Renovation" class="cp-cta-logo">
+      <h2 class="cp-section-title">Available for site walks, support scope reviews,<br>and subcontractor discussions.</h2>
+      <p class="cp-section-text">Let's review how Livane Renovation can support your next renovation, floor restoration, door installation, millwork, or finish-stage project need.</p>
+      <div class="cp-cta-contact">
+        <a href="https://www.livanerenovation.com">www.livanerenovation.com</a>
+        <a href="tel:+14074595565">(407) 459-5565</a>
+        <a href="mailto:onur@livanerenovation.com">onur@livanerenovation.com</a>
+        <span>Miami · Fort Lauderdale · Broward County</span>
+      </div>
+    </div>
+  </section>
+
+  <script src="./art.js"></script>
+<script src="./v71-site.js"></script></body>
+</html>

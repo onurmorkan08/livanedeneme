@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="./livane_logo.png" />
+  <link rel="icon" type="image/png" href="./livane_logo.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="./livane_logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Our South Florida Renovation Company | Livane</title>
+  <meta name="description" content="The story behind Livane Renovation — South Florida renovation specialists serving Miami and Fort Lauderdale with floor restoration, renovation, and exterior services." />
+  <meta name="keywords" content="Livane Renovation, renovation company Miami, floor restoration company South Florida, renovation contractor Fort Lauderdale, surface restoration company Florida" />
+  <meta name="author" content="Livane Renovation" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Outfit:wght@300;400;500;600;700;800;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Hero ── */
+    .inner-hero{position:relative;min-height:80vh;display:flex;align-items:center;overflow:hidden}
+    .inner-hero-bg{position:absolute;inset:0}
+    .inner-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+    .inner-hero-overlay{position:absolute;inset:0;background:linear-gradient(120deg,rgba(4,10,22,.97) 0%,rgba(4,10,22,.78) 50%,rgba(4,10,22,.25) 100%)}
+    .inner-hero-content{position:relative;z-index:2;padding:10rem 0 6rem}
+    .breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:rgba(255,255,255,.3);margin-bottom:1.5rem;letter-spacing:.04em}
+    .breadcrumb a{color:rgba(255,255,255,.4);transition:color .15s}.breadcrumb a:hover{color:var(--cyan)}
+    .breadcrumb-sep{color:rgba(255,255,255,.15)}
+    .inner-h1{font-family:var(--font-d);font-size:clamp(2.6rem,5.5vw,4.5rem);font-weight:900;line-height:1.04;letter-spacing:-.03em;color:var(--white);max-width:820px;margin-bottom:1.5rem}
+    .inner-h1 em{font-style:italic;color:var(--cyan);font-family:var(--font-s)}
+    .inner-sub{font-size:1.08rem;color:rgba(240,244,255,.55);max-width:560px;line-height:1.75}
+
+    /* ── Story Layout ── */
+    .story-section{background:var(--navy);padding:7rem 0}
+    .story-lead{font-family:var(--font-d);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;color:var(--white);line-height:1.25;margin-bottom:2rem;max-width:740px}
+    .story-body{font-size:.97rem;color:rgba(240,244,255,.58);line-height:1.85;max-width:680px}
+    .story-body p{margin-bottom:1.4rem}
+    .story-body p:last-child{margin-bottom:0}
+    .story-pull{background:rgba(74,158,255,.06);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;padding:1.75rem 2rem;margin:2.5rem 0;font-size:1.0rem;color:rgba(240,244,255,.75);line-height:1.8;font-style:italic;font-family:var(--font-s)}
+
+    /* ── Inline image ── */
+    .story-img{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.07);margin:3rem 0}
+    .story-img img{width:100%;display:block;height:420px;object-fit:cover}
+    .story-img-caption{font-size:.75rem;color:rgba(240,244,255,.3);padding:.75rem 1rem;letter-spacing:.04em;text-align:center}
+
+    /* ── Split img + text ── */
+    .story-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin:4rem 0}
+    .story-split--reverse{direction:rtl}.story-split--reverse > *{direction:ltr}
+    .story-split-img{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.07)}
+    .story-split-img img{width:100%;height:360px;object-fit:cover;display:block}
+    .story-split-text h3{font-family:var(--font-d);font-size:1.35rem;font-weight:800;color:var(--white);margin-bottom:1rem;line-height:1.2}
+    .story-split-text p{font-size:.92rem;color:rgba(240,244,255,.55);line-height:1.8;margin-bottom:1.1rem}
+    .story-split-text p:last-child{margin-bottom:0}
+
+    /* ── Values section ── */
+    .values-section{background:var(--navy-deep);padding:7rem 0;border-top:1px solid var(--border)}
+    .values-header{max-width:680px;margin:0 auto 4rem;text-align:center}
+    .values-header h2{font-family:var(--font-d);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:.85rem}
+    .values-header p{font-size:.93rem;color:rgba(240,244,255,.45);line-height:1.75}
+    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    .value-card{background:var(--navy-card);border:1px solid var(--border);border-radius:12px;padding:2rem 1.75rem;position:relative;overflow:hidden;transition:border-color .3s,transform .4s var(--ease-out)}
+    .value-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity .3s}
+    .value-card:hover{border-color:var(--border-hover);transform:translateY(-4px)}
+    .value-card:hover::before{opacity:1}
+    .value-num{font-family:var(--font-d);font-size:2.5rem;font-weight:900;color:rgba(255,255,255,.04);line-height:1;margin-bottom:.5rem}
+    .value-card h3{font-family:var(--font-d);font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:.5rem}
+    .value-card p{font-size:.83rem;color:rgba(240,244,255,.5);line-height:1.6}
+
+    /* ── How section ── */
+    .how-section{background:var(--navy-mid);padding:7rem 0;border-top:1px solid var(--border)}
+    .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+    .how-left h2{font-family:var(--font-d);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:var(--white);margin-bottom:1.25rem;line-height:1.1}
+    .how-left p{font-size:.93rem;color:rgba(240,244,255,.55);line-height:1.8;margin-bottom:1.25rem}
+    .how-steps{display:flex;flex-direction:column;gap:1.25rem}
+    .how-step{display:flex;gap:1.25rem;align-items:flex-start}
+    .how-step-num{font-family:var(--font-d);font-size:1.4rem;font-weight:900;color:var(--cyan);opacity:.5;flex-shrink:0;min-width:2rem;line-height:1}
+    .how-step-text h4{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.25rem}
+    .how-step-text p{font-size:.82rem;color:rgba(240,244,255,.45);line-height:1.55}
+
+    /* ── Service area map cards ── */
+    .area-section{background:var(--navy);padding:7rem 0;border-top:1px solid var(--border)}
+    .area-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
+    .area-card{background:var(--navy-card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:border-color .3s}
+    .area-card:hover{border-color:var(--border-hover)}
+    .area-name{font-family:var(--font-d);font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:.5rem}
+    .area-desc{font-size:.82rem;color:rgba(240,244,255,.45);line-height:1.55}
+
+    /* ── CTA ── */
+    .about-cta{background:var(--navy-deep);padding:7rem 0;border-top:1px solid var(--border);text-align:center}
+    .about-cta h2{font-family:var(--font-d);font-size:clamp(1.9rem,3vw,2.8rem);font-weight:900;color:var(--white);margin-bottom:1rem;line-height:1.1}
+    .about-cta p{font-size:.97rem;color:rgba(240,244,255,.5);max-width:520px;margin:0 auto 2.5rem;line-height:1.75}
+
+    /* ── Responsive ── */
+    @media(max-width:900px){
+      .story-split{grid-template-columns:1fr}.story-split--reverse{direction:ltr}
+      .values-grid{grid-template-columns:1fr 1fr}
+      .how-grid{grid-template-columns:1fr}
+      .area-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:580px){
+      .values-grid{grid-template-columns:1fr}
+      .area-grid{grid-template-columns:1fr}
+      .story-img img{height:260px}
+      .story-split-img img{height:240px}
+    }
+  </style>
+  <meta name="robots" content="index, follow" />
+  <meta name="geo.region" content="US-FL" />
+  <meta name="geo.placename" content="Miami, Florida" />
+  <link rel="canonical" href="https://www.livanerenovation.com/about" />
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@graph": [{
+      "@type": "AboutPage",
+      "name": "About Livane Renovation",
+      "url": "https://www.livanerenovation.com/about",
+      "description": "The story behind Livane Renovation, South Florida renovation specialists.",
+      "mainEntity": {"@type": "Organization","name": "Livane Renovation","foundingDate": "2015","areaServed": "South Florida"}
+    }]}
+  </script>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.livanerenovation.com/about" />
+  <meta property="og:title" content="About Our South Florida Renovation Company | Livane" />
+  <meta property="og:description" content="The story behind Livane Renovation — South Florida renovation specialists serving Miami and Fort Lauderdale with floor restoration, renovation, and exterior services." />
+  <meta property="og:image" content="https://www.livanerenovation.com/about_lobby.png" />
+  <meta property="og:site_name" content="Livane Renovation" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script id="livane-entity-graph" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.livanerenovation.com/about#webpage","url":"https://www.livanerenovation.com/about","name":"About Our South Florida Renovation Company | Livane","description":"The story behind Livane Renovation — South Florida renovation specialists serving Miami and Fort Lauderdale with floor restoration, renovation, and exterior services.","isPartOf":{"@id":"https://www.livanerenovation.com/#website"},"about":{"@id":"https://www.livanerenovation.com/#localbusiness"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://www.livanerenovation.com/about#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.livanerenovation.com/"},{"@type":"ListItem","position":2,"name":"About Our South Florida Renovation Company","item":"https://www.livanerenovation.com/about"}]}]}</script>
+  <link rel="stylesheet" href="./art.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet"><link rel="stylesheet" href="./v71-site.css"></head>
+<body class="v71-page">
+  
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+  <header class="nav-header" id="nav-header">
+    <div class="nav-container">
+      <a href="./index.html" class="nav-logo" id="nav-logo">
+        <img src="./livane_logo.png" alt="Livane Renovation" class="site-logo-img" />
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="./renovation.html" class="nav-link">Renovation</a>
+        <a href="./project-support.html" class="nav-link">Project Coordination</a>
+        <a href="./interior-door-installation.html" class="nav-link">Doors &amp; Finishes</a>
+        <a href="./materials.html" class="nav-link">Materials</a>
+        <a href="./about.html" class="nav-link">About</a>
+        <a href="./references.html" class="nav-link">References</a>
+        <a href="./quote.html" class="btn-nav">Get a Quote</a>
+      </nav>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mob-nav" id="mob-nav">
+    <button class="mob-close" id="mob-close">x</button>
+    <a href="./renovation.html" class="mob-link">Renovation</a>
+        <a href="./project-support.html" class="mob-link">Project Coordination</a>
+        <a href="./interior-door-installation.html" class="mob-link">Doors &amp; Finishes</a>
+        <a href="./materials.html" class="mob-link">Materials</a>
+    <a href="./about.html" class="mob-link">About</a>
+    <a href="./references.html" class="mob-link">References</a>
+    <a href="./quote.html" class="mob-link mob-cta">Get a Quote</a>
+  </div>
+  <div class="mob-overlay" id="mob-overlay"></div>
+
+  <main>
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="inner-hero">
+      <div class="inner-hero-bg">
+        <img src="about_lobby.png" alt="Mirror-polished terrazzo lobby floor restored by Livane Renovation, South Florida" />
+        <div class="inner-hero-overlay"></div>
+      </div>
+      <div class="container inner-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="./index.html">Home</a><span class="breadcrumb-sep">›</span><span>About Us</span>
+        </nav>
+        <p class="label-tag">Renovation Company · South Florida</p>
+        <h1 class="inner-h1">Practical renovation work for South Florida properties.</h1>
+        <p class="inner-sub">Livane Renovation plans and executes tile installation, kitchen remodeling, bathroom remodeling, patio remodeling, floor restoration, interior finish work, and renovation support for South Florida homes, businesses, and managed properties.</p>
+      </div>
+    </section>
+
+    <section class="story-section" id="company-facts" aria-labelledby="company-facts-title" style="background:var(--navy-deep);border-bottom:1px solid var(--border)">
+      <div class="container">
+        <p class="label-tag">Company facts</p>
+        <h2 id="company-facts-title" class="section-title section-title--light">What is Livane Renovation?</h2>
+        <p class="story-lead">Livane Renovation is a South Florida renovation and surface restoration company founded by Onur Morkan and serving Miami-Dade, Broward and Palm Beach counties.</p>
+        <div class="story-body">
+          <p>The company focuses on tile installation, kitchen remodeling, bathroom remodeling, patio renovation, floor restoration, marble and terrazzo restoration, concrete polishing and selected interior finish work. Typical projects include residences, occupied properties, condo and managed-property interiors, offices, retail environments and selected commercial spaces.</p>
+          <p>Projects begin with a review of current conditions, photographs, approximate area, access, adjoining finishes, material requirements and the intended result. Straightforward work may proceed from a documented scope review; complex or multi-scope work may require an onsite evaluation. Public project evidence is available in the <a href="./projects.html">project knowledge base</a>, and the founder profile is available on the <a href="./about.html">Onur Morkan page</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ STORY ═══════ -->
+    <section class="story-section" id="story">
+      <div class="container">
+
+        <p class="story-lead">Livane Renovation is built around clearly defined renovation scopes and dependable execution.</p>
+        <div class="story-body">
+          <p>We are a South Florida renovation-focused company serving homeowners, property owners, managers, builders, designers, and professionally managed spaces. Our work starts with the existing conditions and the result the client needs - not a generic package.</p>
+          <p>Our primary service direction is tile installation, kitchen remodeling, bathroom remodeling, and patio remodeling. We also support projects with floor restoration, marble and terrazzo work, concrete polishing, interior doors, millwork, carpet, and multi-scope renovation coordination.</p>
+        </div>
+        <div class="story-img">
+          <img src="about_team.png" alt="Livane Renovation team reviewing a South Florida renovation scope" />
+          <div class="story-img-caption">Clear scope, practical sequencing, accountable delivery.</div>
+        </div>
+        <div class="story-body">
+          <p>We review photos, approximate square footage, access, material requirements, adjacent finishes, and timing before recommending the next step. Straightforward projects can often begin with a documented scope review; complex or multi-trade work may require an on-site evaluation.</p>
+          <p>Livane Renovation serves Miami-Dade, Fort Lauderdale, Broward County, and surrounding South Florida markets. Clients work with us when they need a practical renovation partner that communicates clearly, respects occupied properties, and stays accountable for the agreed scope.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════ VALUES ═══════ -->
+    <section class="values-section" id="values">
+      <div class="container">
+        <div class="values-header">
+          <p class="label-tag label-tag--light">What We Stand For</p>
+          <h2>How we work hasn't changed since that first lobby.</h2>
+          <p>We still show up with first-day energy. We still walk the surface before we touch anything. We still don't leave until the result is something we'd be proud to hand back if it were our own building.</p>
+        </div>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-num">01</div>
+            <h3>Evaluation Before Method</h3>
+            <p>What a floor in Miami needs isn't always what a floor in Fort Lauderdale needs. What a marble lobby needs isn't what a concrete warehouse needs. We assess the actual surface condition before deciding anything — because the wrong process on the right surface is still the wrong answer.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-num">02</div>
+            <h3>The Quiet and Right Thing</h3>
+            <p>We don't do the fast and careless thing. We do the quiet and right thing. Our crew doesn't rush to hit numbers. They move at the pace the work requires — methodical, focused, aware that the result lives in the building long after we're gone.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-num">03</div>
+            <h3>One Partner, Not a Vendor List</h3>
+            <p>When a property needs floor restoration, interior finish work, and exterior surface sealing, we handle all of it under one coordinated scope. Fewer handoffs, cleaner scheduling, and a single point of accountability for the result.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-num">04</div>
+            <h3>Scope Clarity Before Mobilizing</h3>
+            <p>We define the exact scope, surface access requirements, material specifications, and timeline before our crew sets foot on site. No surprises mid-project. No vague estimates that expand later. Owners, managers, and builders get exactly what they were told they would get.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-num">05</div>
+            <h3>Territory We Know Well</h3>
+            <p>South Florida is our market. Miami-Dade, Fort Lauderdale, Broward County — we understand the climate conditions, the surface types common to the region, the pace of property management here, and how to coordinate within occupied spaces without disrupting tenants.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-num">06</div>
+            <h3>No Overcommitting</h3>
+            <p>We don't pretend to be a full general contractor. We don't take work we can't execute well. We define our scope clearly and execute it with precision. That honesty is what keeps property owners and managers coming back — because in this industry, knowing what someone won't do is as valuable as knowing what they will.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ HOW WE WORK ═══════ -->
+    <section class="how-section" id="how">
+      <div class="container">
+        <div class="how-grid">
+          <div class="how-left">
+            <p class="label-tag">How We Work</p>
+            <h2>One small thing that keeps everything reliable.</h2>
+            <p>Our process is designed so homeowners, property owners, managers, and builders can hand us a scope and step back — knowing the result will be what they were told it would be.</p>
+            <p>Before any crew mobilizes, we confirm the full scope: surface condition, access instructions, building rules, water hookup location, tenant schedule constraints, and anything else that affects how the work gets done. It's a human step that removes the kind of surprises that turn good renovation work into bad experiences.</p>
+            <div class="story-pull" style="margin-top:2rem">
+              "The job is not just the surface. The job is returning a better-looking, better-protected space to a client who can trust the work is handled."
+            </div>
+          </div>
+          <div class="how-right">
+            <div class="how-steps">
+              <div class="how-step">
+                <span class="how-step-num">01</span>
+                <div class="how-step-text">
+                  <h4>Share the Scope</h4>
+                  <p>Send us photos, square footage, and a description of the surface condition. We review before committing to anything — because an honest scope starts with honest information.</p>
+                </div>
+              </div>
+              <div class="how-step">
+                <span class="how-step-num">02</span>
+                <div class="how-step-text">
+                  <h4>Site Visit If Needed</h4>
+                  <p>For multi-scope or complex projects, we visit the property to assess conditions directly, measure accurately, and confirm the right method before providing pricing.</p>
+                </div>
+              </div>
+              <div class="how-step">
+                <span class="how-step-num">03</span>
+                <div class="how-step-text">
+                  <h4>Scope & Timeline Agreement</h4>
+                  <p>We agree on the exact scope, materials, access requirements, and schedule in writing. No expansions mid-project. No vague language that shifts after you say yes.</p>
+                </div>
+              </div>
+              <div class="how-step">
+                <span class="how-step-num">04</span>
+                <div class="how-step-text">
+                  <h4>Execution & Delivery</h4>
+                  <p>Our trained crew executes the work with professional-grade equipment. Site is left clean. The result is documented and delivered exactly as defined — and you don't have to chase us down to find out if it's done.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ PAVER IMAGE + WHY ═══════ -->
+    <section class="story-section" style="background:var(--navy-deep);border-top:1px solid var(--border)" id="why">
+      <div class="container">
+        <div class="story-split story-split--reverse">
+          <div class="story-split-img">
+            <img src="about_paver.png" alt="Freshly sealed travertine pavers at a South Florida property entrance, Livane Renovation" />
+          </div>
+          <div class="story-split-text">
+            <h3>Why we care about this work.</h3>
+            <p>A property should feel right to everyone who walks through it — clients, tenants, employees, visitors. The floor is never just a surface. It's the first impression before anyone says a word. The lobby terrazzo your building's had for forty years tells people something about you every single day. Whether it's been restored or neglected is obvious before anyone even looks up.</p>
+            <p>We believe the value of a well-maintained property is in keeping it ready. Clean enough to be proud of. Protected enough that it's not quietly aging faster than it should.</p>
+            <p>That's what we're here for.</p>
+            <div style="margin-top:2rem">
+              <a href="./quote.html" class="btn-primary" id="why-cta">Work With Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ SERVICE AREA ═══════ -->
+    <section class="area-section" id="service-area">
+      <div class="container">
+        <p class="label-tag">Where We Work</p>
+        <h2 class="section-title">South Florida is our focus.<br>Miami and Fort Lauderdale are our home market.</h2>
+        <div class="area-grid">
+          <div class="area-card">
+            <div class="area-name">Miami-Dade County</div>
+            <div class="area-desc">Commercial offices, hotel lobbies, retail floors, multifamily common areas, and institutional properties across Miami-Dade — from Brickell to Doral to Hialeah.</div>
+          </div>
+          <div class="area-card">
+            <div class="area-name">Fort Lauderdale &amp; Broward</div>
+            <div class="area-desc">Office parks, commercial campuses, and mixed-use properties across Broward County — including Fort Lauderdale, Davie, Pompano Beach, and surrounding areas.</div>
+          </div>
+          <div class="area-card">
+            <div class="area-name">Wider South Florida</div>
+            <div class="area-desc">For the right scope and the right client relationship, we work across the broader South Florida region. Reach out — if we can do it well, we'll tell you. If we can't, we'll tell you that too.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ FINAL CTA ═══════ -->
+    <section class="about-cta" id="contact">
+      <div class="container">
+        <p class="label-tag label-tag--cyan">Let's Work Together</p>
+        <h2>If you're in South Florida and looking for a crew you don't have to manage —</h2>
+        <p>Just someone who shows up, respects the property, and does the work properly — we'd love to take care of it. Share photos, describe the space, and tell us what needs to be done. We'll respond with a structured plan, not a generic quote.</p>
+        <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
+          <a href="./quote.html" class="btn-primary btn-lg" id="cta-quote">Request a Quote</a>
+          <a href="tel:+14074595565" class="btn-outline-white btn-lg" id="cta-phone">Call Us</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="./livane_logo.png" alt="Livane Renovation" class="site-logo-img" />
+        </div>
+        <p class="footer-tagline">Renovation, floor restoration, interior finish work, and exterior surface services across South Florida.</p>
+      </div>
+      <div class="footer-col"><p class="footer-col-label">Services</p><a href="./floor-restoration.html" class="footer-link">Floor Polishing &amp; Restoration</a><a href="./renovation.html" class="footer-link">Renovation &amp; Interior Finish</a><a href="./exterior.html" class="footer-link">Exterior Surface Services</a><a href="./project-support.html" class="footer-link">Renovation Support</a></div>
+      <div class="footer-col"><p class="footer-col-label">Company</p><a href="./about.html" class="footer-link">About</a><a href="./index.html#process" class="footer-link">How We Work</a><a href="./index.html#service-area" class="footer-link">Service Area</a><a href="./quote.html" class="footer-link">Contact</a></div>
+      <div class="footer-col"><p class="footer-col-label">Contact</p><a href="mailto:onur@livanerenovation.com" class="footer-link footer-link--accent">onur@livanerenovation.com</a><a href="tel:+14074595565" class="footer-link">(407) 459-5565</a><p class="footer-area-text">Miami-Dade · Broward · Palm Beach</p></div>
+    </div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p>© <span id="yr"></span> Livane Renovation. All rights reserved.</p><p>Renovation &amp; Restoration · South Florida</p></div></div>
+  </footer>
+  <script src="main.js"></script>
+  <script src="./art.js"></script>
+<script src="./v71-site.js"></script></body>
+</html>
