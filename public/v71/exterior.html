@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="./livane_logo.png" />
+  <link rel="icon" type="image/png" href="./livane_logo.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="./livane_logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patio & Exterior Surface Services Miami | Livane Renovation</title>
+  <meta name="description" content="Commercial pressure washing, paver sealing, pool deck restoration, and exterior surface restoration in Miami and Fort Lauderdale. Livane Renovation — South Florida." />
+  <meta name="keywords" content="commercial pressure washing Miami, paver sealing Miami, pool deck restoration Fort Lauderdale, paver sealing Broward County, exterior surface restoration South Florida, hardscape restoration Miami, pressure washing Fort Lauderdale" />
+  <meta name="author" content="Livane Renovation" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Outfit:wght@300;400;500;600;700;800;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .inner-hero{position:relative;min-height:72vh;display:flex;align-items:center;overflow:hidden}
+    .inner-hero-bg{position:absolute;inset:0}
+    .inner-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+    .inner-hero-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(8,15,26,.92) 0%,rgba(8,15,26,.7) 50%,rgba(8,15,26,.3) 100%)}
+    .inner-hero-content{position:relative;z-index:2;padding:9rem 0 5rem}
+    .breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:rgba(255,255,255,.3);margin-bottom:1.5rem;letter-spacing:.04em}
+    .breadcrumb a{color:rgba(255,255,255,.4);transition:color .15s}.breadcrumb a:hover{color:var(--cyan)}
+    .breadcrumb-sep{color:rgba(255,255,255,.15)}
+    .inner-h1{font-family:var(--font-d);font-size:clamp(2.4rem,5vw,4rem);font-weight:900;line-height:1.06;letter-spacing:-.03em;color:var(--white);max-width:780px;margin-bottom:1.25rem}
+    .inner-sub{font-size:1.05rem;color:rgba(240,244,255,.6);max-width:580px;line-height:1.7;margin-bottom:2.5rem}
+    .area-pills{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}
+    .area-pill{background:rgba(74,158,255,.08);border:1px solid rgba(74,158,255,.15);color:rgba(74,158,255,.8);font-size:.73rem;font-weight:500;padding:.35rem .9rem;border-radius:100px;letter-spacing:.04em}
+    .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
+    .svc-card{background:var(--navy-card);border:1px solid var(--border);border-radius:12px;padding:2rem 1.75rem;position:relative;overflow:hidden;transition:border-color .3s,transform .45s var(--ease-out)}
+    .svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity .3s}
+    .svc-card:hover{border-color:var(--border-hover);transform:translateY(-4px)}
+    .svc-card:hover::before{opacity:1}
+    .svc-card-num{font-family:var(--font-d);font-size:2.2rem;font-weight:900;color:rgba(255,255,255,.04);line-height:1;margin-bottom:.5rem}
+    .svc-card h3{font-family:var(--font-d);font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:.5rem}
+    .svc-card p{font-size:.83rem;color:rgba(240,244,255,.5);line-height:1.6}
+    .climate-section{background:var(--navy-mid);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:6rem 0}
+    .climate-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .climate-left h2{font-family:var(--font-d);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;color:var(--white);margin-bottom:1.25rem;line-height:1.1}
+    .climate-left p{font-size:.93rem;color:rgba(240,244,255,.55);line-height:1.75;margin-bottom:1.25rem}
+    .reason-list{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
+    .reason-item{display:flex;align-items:flex-start;gap:.75rem;font-size:.88rem;color:rgba(240,244,255,.65)}
+    .reason-icon{color:var(--cyan);flex-shrink:0;margin-top:.1em;font-weight:700}
+    .climate-right{display:flex;flex-direction:column;gap:1.25rem}
+    .climate-box{background:var(--navy-card);border:1px solid var(--border);border-radius:12px;padding:1.75rem}
+    .climate-box h3{font-family:var(--font-d);font-size:1rem;font-weight:700;color:var(--cyan);margin-bottom:.5rem}
+    .climate-box p{font-size:.83rem;color:rgba(240,244,255,.5);line-height:1.6}
+    .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:3rem}
+    .pstep{background:var(--navy-card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:border-color .3s}
+    .pstep:hover{border-color:var(--border-hover)}
+    .pstep-num{font-family:var(--font-d);font-size:2.5rem;font-weight:900;color:rgba(255,255,255,.05);line-height:1;margin-bottom:.75rem}
+    .pstep h3{font-family:var(--font-d);font-size:.95rem;font-weight:700;color:var(--cyan);margin-bottom:.5rem}
+    .pstep p{font-size:.82rem;color:rgba(240,244,255,.45);line-height:1.55}
+    .faq-list{display:flex;flex-direction:column;gap:.75rem;margin-top:3rem;max-width:820px}
+    .faq-item{background:var(--navy-card);border:1px solid var(--border);border-radius:10px;transition:border-color .3s}
+    .faq-item:hover{border-color:var(--border-hover)}
+    .faq-q{font-size:.95rem;font-weight:600;color:var(--white);padding:1.4rem 1.75rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .faq-icon{color:var(--cyan);font-size:1.1rem;flex-shrink:0}
+    .faq-a{font-size:.88rem;color:rgba(240,244,255,.55);line-height:1.7;padding:0 1.75rem 1.4rem}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem}
+    .related-card{background:var(--navy-card);border:1px solid var(--border);border-radius:10px;padding:1.75rem;display:flex;align-items:flex-start;gap:1rem;transition:all .3s var(--ease-out);text-decoration:none;color:inherit}
+    .related-card:hover{border-color:var(--border-hover);transform:translateY(-3px)}
+    .related-card h3{font-size:.9rem;font-weight:700;color:var(--white);margin-bottom:.35rem}
+    .related-card p{font-size:.78rem;color:rgba(240,244,255,.4);line-height:1.5}
+    .related-icon{font-size:1.4rem;flex-shrink:0}
+    @media(max-width:900px){.service-grid{grid-template-columns:1fr 1fr}.climate-grid{grid-template-columns:1fr}.process-steps{grid-template-columns:1fr 1fr}.related-grid{grid-template-columns:1fr}}
+    @media(max-width:580px){.service-grid{grid-template-columns:1fr}.process-steps{grid-template-columns:1fr}}
+
+    /* ── Exterior Project Gallery ── */
+    .ext-gallery-section{background:var(--navy-deep);padding:0 0 7rem;border-bottom:1px solid var(--border)}
+    .ext-gallery-header{text-align:center;max-width:680px;margin:0 auto;padding:5rem 0 3.5rem}
+    .ext-gallery-header h2{font-family:var(--font-d);font-size:clamp(1.9rem,3.2vw,2.75rem);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:.85rem}
+    .ext-gallery-header p{font-size:.93rem;color:rgba(240,244,255,.45);line-height:1.75}
+    /* Main grid: 2-col with featured left card */
+    .ext-gallery-main{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:360px 240px;gap:.85rem;margin-bottom:.85rem}
+    .ext-proj{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+    .ext-proj--featured{grid-row:1/3}
+    .ext-proj img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out)}
+    .ext-proj:hover img{transform:scale(1.07)}
+    .ext-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,10,20,.97) 0%,rgba(4,10,20,.35) 55%,transparent 100%);transition:background .4s}
+    .ext-proj:hover .ext-overlay{background:linear-gradient(to top,rgba(4,10,20,.99) 0%,rgba(4,10,20,.5) 60%,rgba(4,10,20,.1) 100%)}
+    .ext-info{position:absolute;bottom:0;left:0;right:0;padding:1.5rem 1.75rem}
+    .ext-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(74,158,255,.12);border:1px solid rgba(74,158,255,.25);color:var(--cyan);font-size:.63rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:.25rem .75rem;border-radius:100px;margin-bottom:.65rem;backdrop-filter:blur(8px)}
+    .ext-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+    .ext-title{font-family:var(--font-d);font-size:1.05rem;font-weight:700;color:var(--white);line-height:1.2;margin-bottom:.35rem}
+    .ext-proj--featured .ext-title{font-size:1.3rem}
+    .ext-desc{font-size:.78rem;color:rgba(240,244,255,.55);line-height:1.5;max-width:360px}
+    /* Bottom strip: 3 equal cards */
+    .ext-gallery-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;height:220px}
+    .ext-proj--strip{border-radius:14px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.06)}
+    .ext-proj--strip img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out)}
+    .ext-proj--strip:hover img{transform:scale(1.07)}
+    /* Responsive */
+    @media(max-width:900px){
+      .ext-gallery-main{grid-template-columns:1fr 1fr;grid-template-rows:280px 220px}
+      .ext-proj--featured{grid-row:auto;grid-column:1/3}
+      .ext-gallery-strip{height:180px}
+    }
+    @media(max-width:600px){
+      .ext-gallery-main{grid-template-columns:1fr;grid-template-rows:auto}
+      .ext-proj{height:260px}
+      .ext-proj--featured{height:300px;grid-column:auto}
+      .ext-gallery-strip{grid-template-columns:1fr;height:auto}
+      .ext-proj--strip{height:220px}
+    }
+  </style>
+  <meta name="robots" content="index, follow" />
+  <meta name="geo.region" content="US-FL" />
+  <meta name="geo.placename" content="Miami, Florida" />
+  <link rel="canonical" href="https://www.livanerenovation.com/exterior" />
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@graph": [{
+      "@type": "Service",
+      "name": "Commercial Exterior Surface Services",
+      "provider": {"@type": "Organization","name": "Livane Renovation","url": "https://www.livanerenovation.com"},
+      "areaServed": [{"@type": "City","name": "Miami"},{"@type": "City","name": "Fort Lauderdale"},{"@type": "AdministrativeArea","name": "Broward County"}],
+      "description": "Commercial pressure washing, paver sealing, pool deck restoration, and exterior hardscape surface preparation and protection in South Florida.",
+      "serviceType": ["Pressure Washing","Paver Sealing","Pool Deck Restoration","Exterior Surface Restoration"]
+    }]}
+  </script>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.livanerenovation.com/exterior" />
+  <meta property="og:title" content="Patio & Exterior Surface Services Miami | Livane Renovation" />
+  <meta property="og:description" content="Commercial pressure washing, paver sealing, pool deck restoration, and exterior surface restoration in Miami and Fort Lauderdale. Livane Renovation — South Florida." />
+  <meta property="og:image" content="https://www.livanerenovation.com/hero_lobby.png" />
+  <meta property="og:site_name" content="Livane Renovation" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script id="livane-entity-graph" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.livanerenovation.com/exterior#webpage","url":"https://www.livanerenovation.com/exterior","name":"Patio & Exterior Surface Services Miami | Livane Renovation","description":"Commercial pressure washing, paver sealing, pool deck restoration, and exterior surface restoration in Miami and Fort Lauderdale. Livane Renovation — South Florida.","isPartOf":{"@id":"https://www.livanerenovation.com/#website"},"about":{"@id":"https://www.livanerenovation.com/#localbusiness"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://www.livanerenovation.com/exterior#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.livanerenovation.com/"},{"@type":"ListItem","position":2,"name":"Patio & Exterior Surface Services Miami","item":"https://www.livanerenovation.com/exterior"}]}]}</script>
+  <link rel="stylesheet" href="./art.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet"><link rel="stylesheet" href="./v71-site.css"></head>
+<body class="v71-page">
+  
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+  <header class="nav-header" id="nav-header">
+    <div class="nav-container">
+      <a href="./index.html" class="nav-logo" id="nav-logo">
+        <img src="./livane_logo.png" alt="Livane Renovation" class="site-logo-img" />
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="./renovation.html" class="nav-link">Renovation</a>
+        <a href="./project-support.html" class="nav-link">Project Coordination</a>
+        <a href="./interior-door-installation.html" class="nav-link">Doors &amp; Finishes</a>
+        <a href="./materials.html" class="nav-link">Materials</a>
+        <a href="./about.html" class="nav-link">About</a>
+        <a href="./references.html" class="nav-link">References</a>
+        <a href="./quote.html" class="btn-nav">Get a Quote</a>
+      </nav>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mob-nav" id="mob-nav">
+    <button class="mob-close" id="mob-close">x</button>
+    <a href="./renovation.html" class="mob-link">Renovation</a>
+        <a href="./project-support.html" class="mob-link">Project Coordination</a>
+        <a href="./interior-door-installation.html" class="mob-link">Doors &amp; Finishes</a>
+        <a href="./materials.html" class="mob-link">Materials</a>
+    <a href="./about.html" class="mob-link">About</a>
+    <a href="./references.html" class="mob-link">References</a>
+    <a href="./quote.html" class="mob-link mob-cta">Get a Quote</a>
+  </div>
+  <div class="mob-overlay" id="mob-overlay"></div>
+
+  <main>
+    <section class="inner-hero">
+      <div class="inner-hero-bg">
+        <img src="page_exterior_hero.png" alt="Professionally sealed paver walkway at a South Florida property" />
+        <div class="inner-hero-overlay"></div>
+      </div>
+      <div class="container inner-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="./index.html">Home</a><span class="breadcrumb-sep">›</span><span>Exterior Surface Restoration &amp; Sealing</span>
+        </nav>
+        <p class="label-tag">Core Service · South Florida</p>
+        <h1 class="inner-h1">Commercial Exterior Surface Restoration &amp; Sealing in South Florida</h1>
+        <p class="inner-sub">Pressure washing, paver sealing, patio surfaces, and pool deck restoration for homes, businesses, and managed properties across Miami, Fort Lauderdale, and Broward County. First impressions start outside.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="./quote.html" class="btn-primary" id="hero-cta1">Request a Quote</a>
+          <a href="#services" class="btn-ghost" id="hero-cta2">See Our Services</a>
+        </div>
+        <div class="area-pills">
+          <span class="area-pill">Miami-Dade County</span>
+          <span class="area-pill">Fort Lauderdale</span>
+          <span class="area-pill">Broward County</span>
+          <span class="area-pill">South Florida</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         EXTERIOR PROJECTS GALLERY
+    ════════════════════════════════ -->
+    <section class="ext-gallery-section" id="projects">
+      <div class="container">
+        <div class="ext-gallery-header">
+          <p class="label-tag label-tag--light">Completed Projects</p>
+          <h2>South Florida Exteriors We've Restored</h2>
+          <p>Pressure washing, paver sealing, pool decks, and hardscape restoration — each project evaluated, cleaned, and protected to professional standard.</p>
+        </div>
+
+        <!-- Main 2-column grid (featured left + 2 right) -->
+        <div class="ext-gallery-main">
+
+          <!-- Featured: Paver Sealing Courtyard -->
+          <div class="ext-proj ext-proj--featured" id="ep1">
+            <img src="ext_paver_sealing.png" alt="Freshly sealed travertine paver courtyard at South Florida property" />
+            <div class="ext-overlay"></div>
+            <div class="ext-info">
+              <span class="ext-badge">Paver Sealing</span>
+              <p class="ext-title">Commercial Courtyard &mdash; Travertine Paver Restoration &amp; Sealing</p>
+              <p class="ext-desc">Full clean, joint re-sanding, and professional-grade sealant on 6,800 sq ft of travertine pavers at a Broward County office campus. Surface protected against UV, moisture, and staining.</p>
+            </div>
+          </div>
+
+          <!-- Right top: Building Pressure Wash -->
+          <div class="ext-proj" id="ep2">
+            <img src="ext_pressure_wash.png" alt="Commercial office building exterior pressure washed in South Florida" />
+            <div class="ext-overlay"></div>
+            <div class="ext-info">
+              <span class="ext-badge">Pressure Washing</span>
+              <p class="ext-title">4-Story Office Building &mdash; Fa&ccedil;ade Restoration</p>
+              <p class="ext-desc">High-pressure wash of the full building exterior removing algae, mold, and years of South Florida weathering. Miami-Dade.</p>
+            </div>
+          </div>
+
+          <!-- Right bottom: Pool Deck -->
+          <div class="ext-proj" id="ep3">
+            <img src="ext_pool_deck.png" alt="Commercial pool deck restored and sealed, South Florida luxury property" />
+            <div class="ext-overlay"></div>
+            <div class="ext-info">
+              <span class="ext-badge">Pool Deck Restoration</span>
+              <p class="ext-title">Resort Pool Deck &mdash; Cool Deck Restoration &amp; Sealing</p>
+              <p class="ext-desc">3,200 sq ft pool deck cleaned, repaired, and sealed with UV-resistant slip-resistant coating. Fort Lauderdale.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom 3-card strip -->
+        <div class="ext-gallery-strip">
+
+          <!-- Walkway -->
+          <div class="ext-proj ext-proj--strip" id="ep4">
+            <img src="ext_walkway.png" alt="Sealed travertine entrance walkway, South Florida corporate center" />
+            <div class="ext-overlay"></div>
+            <div class="ext-info">
+              <span class="ext-badge">Walkway Restoration</span>
+              <p class="ext-title">Corporate Entrance &mdash; Travertine Walkway Sealed</p>
+            </div>
+          </div>
+
+          <!-- Parking Lot -->
+          <div class="ext-proj ext-proj--strip" id="ep5">
+            <img src="ext_parking_lot.png" alt="Commercial parking lot pressure washed, South Florida office park" />
+            <div class="ext-overlay"></div>
+            <div class="ext-info">
+              <span class="ext-badge">Parking &amp; Hardscape</span>
+              <p class="ext-title">Office Park &mdash; Full Hardscape Pressure Wash</p>
+            </div>
+          </div>
+
+          <!-- CTA Card -->
+          <div style="background:linear-gradient(135deg,rgba(74,158,255,.12) 0%,rgba(74,158,255,.05) 100%);border:1px solid rgba(74,158,255,.2);border-radius:14px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem 1.5rem;gap:1rem">
+            <p style="font-family:var(--font-d);font-size:1.05rem;font-weight:700;color:var(--white);line-height:1.25">Your Property Could Be Next</p>
+            <p style="font-size:.8rem;color:rgba(240,244,255,.45);line-height:1.55">Share photos &amp; square footage. We'll assess and respond with the right scope.</p>
+            <a href="./quote.html" class="btn-primary" style="font-size:.82rem;padding:.75rem 1.5rem" id="gallery-cta">Request a Quote</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services" style="background:var(--navy)">
+      <div class="container">
+        <div class="reveal-fade" data-d="0">
+          <p class="label-tag">What We Provide</p>
+          <h2 class="section-title">Exterior Surface Improvement for Homes, Businesses, and Managed Properties.</h2>
+          <p class="section-sub">We treat exterior surface work as a property improvement scope — not commodity pressure washing. Condition evaluation precedes every method decision.</p>
+        </div>
+        <div class="service-grid">
+          <div class="svc-card reveal-up" data-d="0" id="sv1"><div class="svc-card-num">01</div><h3>Commercial Pressure Washing</h3><p>High-performance pressure washing for exterior hardscapes, building entries, walkways, parking structures, and outdoor common areas. Method-matched to surface material and contamination type.</p></div>
+          <div class="svc-card reveal-up" data-d="80" id="sv2"><div class="svc-card-num">02</div><h3>Paver Cleaning &amp; Sealing</h3><p>Full paver restoration process — cleaning, joint sand replacement where needed, and professional-grade paver sealant application. Protects against staining, UV damage, and water intrusion.</p></div>
+          <div class="svc-card reveal-up" data-d="160" id="sv3"><div class="svc-card-num">03</div><h3>Pool Deck Cleaning &amp; Sealing</h3><p>Commercial pool deck surface treatment — cleaning, repair prep, and sealing for concrete, travertine, and paver pool decks at hotels, multifamily properties, and active properties.</p></div>
+          <div class="svc-card reveal-up" data-d="0" id="sv4"><div class="svc-card-num">04</div><h3>Exterior Surface Restoration</h3><p>Beyond basic washing — we address staining, discoloration, and surface degradation on exterior hardscapes through the correct process for real improvement, not just surface wetting.</p></div>
+          <div class="svc-card reveal-up" data-d="80" id="sv5"><div class="svc-card-num">05</div><h3>Surface Condition Evaluation</h3><p>Pre-treatment evaluation of exterior surface condition — identifying contamination type, material, and the correct cleaning agent, pressure setting, and protective treatment for the specific surface.</p></div>
+          <div class="svc-card reveal-up" data-d="160" id="sv6"><div class="svc-card-num">06</div><h3>Combined Interior + Exterior Scopes</h3><p>When both interior floor restoration and exterior surface work are needed, we package the scopes together under one coordinated execution — fewer vendors, cleaner scheduling.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="climate-section" id="climate">
+      <div class="container">
+        <div class="climate-grid">
+          <div class="climate-left reveal-up" data-d="0">
+            <p class="label-tag">South Florida Context</p>
+            <h2>Why Exterior Surfaces Degrade Faster in South Florida.</h2>
+            <p>South Florida's climate creates accelerated surface degradation. High humidity, intense UV exposure, salt air in coastal properties, and heavy seasonal rain cycles all affect the condition of exterior pavers, pool decks, and hardscapes faster than in most other markets.</p>
+            <p>Neglected exterior surfaces don't just look bad — they accumulate biological growth, staining compounds, and moisture damage that become harder and more expensive to correct over time.</p>
+            <div class="reason-list">
+              <div class="reason-item"><span class="reason-icon">→</span><span>Humidity promotes algae, mold, and mildew growth on paver surfaces</span></div>
+              <div class="reason-item"><span class="reason-icon">→</span><span>UV exposure breaks down sealants and causes color fading</span></div>
+              <div class="reason-item"><span class="reason-icon">→</span><span>Salt air in coastal properties accelerates surface pitting and staining</span></div>
+              <div class="reason-item"><span class="reason-icon">→</span><span>Joint sand depletion leaves unsealed pavers vulnerable to shifting</span></div>
+            </div>
+          </div>
+          <div class="climate-right reveal-up" data-d="150">
+            <div class="climate-box"><h3>Pavers</h3><p>Concrete, brick, and travertine pavers require regular cleaning and resealing to maintain appearance and structural integrity in South Florida conditions.</p></div>
+            <div class="climate-box"><h3>Pool Decks</h3><p>Pool deck surfaces — particularly travertine and concrete — need UV-resistant sealants and regular surface treatment to prevent slip hazards and staining.</p></div>
+            <div class="climate-box"><h3>Hardscapes</h3><p>Exterior walkways, entry plazas, and shared common areas benefit from professional pressure washing and protective treatment at regular intervals.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process" style="background:var(--navy-deep)">
+      <div class="container">
+        <div class="reveal-fade" data-d="0">
+          <p class="label-tag label-tag--light">Our Process</p>
+          <h2 class="section-title section-title--light">Evaluate. Clean. Protect. Maintain.</h2>
+        </div>
+        <div class="process-steps">
+          <div class="pstep reveal-up" data-d="0" id="pp1"><div class="pstep-num">01</div><h3>Surface Evaluation</h3><p>We assess the surface material, contamination type, existing sealant condition, and joint sand integrity before recommending any method or product.</p></div>
+          <div class="pstep reveal-up" data-d="100" id="pp2"><div class="pstep-num">02</div><h3>Cleaning &amp; Preparation</h3><p>We apply the correct pressure, chemistry, and technique for the specific surface. Not all surfaces tolerate the same pressure or cleaning agents.</p></div>
+          <div class="pstep reveal-up" data-d="200" id="pp3"><div class="pstep-num">03</div><h3>Sealing &amp; Protection</h3><p>After cleaning and drying, we apply a professional-grade sealant appropriate for the surface type, climate exposure, and property use case.</p></div>
+          <div class="pstep reveal-up" data-d="300" id="pp4"><div class="pstep-num">04</div><h3>Delivery &amp; Documentation</h3><p>Work is completed with minimal disruption to property operations. We leave the area clean and provide scope documentation if required.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" style="background:var(--navy)">
+      <div class="container">
+        <div class="reveal-fade" data-d="0">
+          <p class="label-tag">Common Questions</p>
+          <h2 class="section-title">Exterior Services — Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal-up" data-d="0" id="fq1"><div class="faq-q">Do you seal pavers for homes, businesses, and managed properties in Miami?<span class="faq-icon">+</span></div><div class="faq-a">Yes. We provide professional paver cleaning and sealing for homes, businesses, and managed properties, common areas, and shared outdoor spaces across Miami-Dade and Broward County. The process includes cleaning, joint re-sanding where needed, and professional-grade sealant application.</div></div>
+          <div class="faq-item reveal-up" data-d="80" id="fq2"><div class="faq-q">Why do South Florida homes, businesses, and managed properties need exterior maintenance more frequently?<span class="faq-icon">+</span></div><div class="faq-a">South Florida's climate — high humidity, UV exposure, salt air, and heavy seasonal rain — accelerates surface degradation on exterior pavers, pool decks, and concrete. Regular cleaning and sealing protects the surface, extends its lifespan, and maintains the visual standard of the property.</div></div>
+          <div class="faq-item reveal-up" data-d="160" id="fq3"><div class="faq-q">Do you offer commercial pressure washing in Fort Lauderdale and Broward County?<span class="faq-icon">+</span></div><div class="faq-a">Yes. We provide commercial pressure washing across South Florida including Fort Lauderdale, Miami, and Broward County. We work on hardscapes, building entries, outdoor common areas, and other exterior commercial surfaces.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="related" style="background:var(--navy-mid);border-top:1px solid var(--border)">
+      <div class="container">
+        <p class="label-tag">Other Services</p>
+        <h2 class="section-title">More from Livane Renovation</h2>
+        <div class="related-grid">
+          <a href="./floor-restoration.html" class="related-card reveal-up" data-d="0" id="rc1"><span class="related-icon">◈</span><div><h3>Floor Polishing &amp; Restoration</h3><p>Concrete, marble, terrazzo, and stone restoration for homes, businesses, and managed properties in South Florida.</p></div></a>
+          <a href="./renovation.html" class="related-card reveal-up" data-d="100" id="rc2"><span class="related-icon">🔨</span><div><h3>Renovation &amp; Interior Finish</h3><p>Door installation, millwork, finish carpentry, and carpet for homes, workplaces, and managed spaces.</p></div></a>
+          <a href="./project-support.html" class="related-card reveal-up" data-d="200" id="rc3"><span class="related-icon">📋</span><div><h3>Project Support</h3><p>Multi-scope coordination and packaged renovation solutions for property teams and builders.</p></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" style="background:var(--navy-deep);border-top:1px solid var(--border);text-align:center">
+      <div class="container reveal-up" data-d="0">
+        <p class="label-tag label-tag--cyan">Get Started</p>
+        <h2 class="section-title">Ready to Improve Your Exterior Surfaces?</h2>
+        <p class="section-sub" style="margin:0 auto 2.5rem">Share photos and describe the condition. Livane Renovation will assess and respond with the right exterior service scope for your property.</p>
+        <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
+          <a href="./quote.html" class="btn-primary btn-lg" id="cta-email">Request a Quote</a>
+          <a href="tel:+14074595565" class="btn-outline-white btn-lg" id="cta-phone">Call Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="./livane_logo.png" alt="Livane Renovation" class="site-logo-img" />
+        </div>
+        <p class="footer-tagline">Renovation, floor restoration, interior finish work, and exterior surface services across South Florida.</p>
+      </div>
+      <div class="footer-col"><p class="footer-col-label">Services</p><a href="./floor-restoration.html" class="footer-link">Floor Polishing &amp; Restoration</a><a href="./renovation.html" class="footer-link">Renovation &amp; Interior Finish</a><a href="./exterior.html" class="footer-link">Patio & Exterior</a><a href="./project-support.html" class="footer-link">Renovation Support</a></div>
+      <div class="footer-col"><p class="footer-col-label">Company</p><a href="./about.html" class="footer-link">About</a><a href="./references.html" class="footer-link">References</a><a href="./index.html#process" class="footer-link">How We Work</a><a href="./index.html#service-area" class="footer-link">Service Area</a><a href="./quote.html" class="footer-link">Contact</a></div>
+      <div class="footer-col"><p class="footer-col-label">Contact</p><a href="mailto:onur@livanerenovation.com" class="footer-link footer-link--accent">onur@livanerenovation.com</a><a href="tel:+14074595565" class="footer-link">(407) 459-5565</a><p class="footer-area-text">Miami-Dade · Broward · Palm Beach</p></div>
+    </div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p>© <span id="yr"></span> Livane Renovation. All rights reserved.</p><p>Renovation &amp; Restoration · South Florida</p></div></div>
+  </footer>
+  <script src="main.js"></script>
+  <script src="./art.js"></script>
+<script src="./v71-site.js"></script></body>
+</html>

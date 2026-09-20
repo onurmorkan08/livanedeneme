@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="./livane_logo.png" />
+  <link rel="icon" type="image/png" href="./livane_logo.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="./livane_logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request a Quote | Livane Renovation</title>
+  <meta name="description" content="Request a renovation quote from Livane Renovation for tile installation, kitchen remodeling, bathroom remodeling, patio remodeling, floor restoration, and interior finish work across South Florida." />
+  <meta name="keywords" content="renovation quote Miami, tile installation quote South Florida, kitchen remodeling quote Fort Lauderdale, bathroom remodeling quote Miami, floor restoration quote South Florida" />
+  <meta name="author" content="Livane Renovation" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.livanerenovation.com/quote" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Outfit:wght@300;400;500;600;700;800;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ═══════════════════════ QUOTE PAGE ═══════════════════════ */
+    .qhero {
+      background: linear-gradient(135deg, #060e1c 0%, #0a1628 60%, #081422 100%);
+      padding: 7.5rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .qhero::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -5%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(74,158,255,.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .qhero-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .qhero h1 {
+      font-family: var(--font-d);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .qhero p { font-size: 1.05rem; color: rgba(240,244,255,.6); line-height: 1.6; max-width: 600px; margin: 0 auto 2rem; }
+
+    .qbody { background: var(--navy); min-height: 60vh; padding: 4rem 0 7rem; }
+    
+    .qform-layout {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 3.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,.2);
+    }
+    .qform-layout::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--cyan) 50%, transparent);
+      opacity: .8;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 1.25rem;
+    }
+    .form-grid .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .fg { display: flex; flex-direction: column; gap: .5rem; }
+    .flabel {
+      font-size: .85rem; font-weight: 600;
+      color: rgba(240,244,255,.7);
+      letter-spacing: .03em;
+    }
+    .flabel .req { color: var(--cyan); }
+    
+    .finput, .fselect, .ftextarea {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      font-size: .95rem;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      transition: all .25s ease;
+      width: 100%;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    .finput::placeholder, .ftextarea::placeholder { color: rgba(240,244,255,.25); }
+    .finput:focus, .fselect:focus, .ftextarea:focus {
+      border-color: var(--cyan);
+      background: rgba(74,158,255,.05);
+      box-shadow: 0 0 0 4px rgba(74,158,255,.1);
+    }
+    .fselect { cursor: pointer; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 1rem top 50%; background-size: .65rem auto; padding-right: 2.5rem; }
+    .fselect option { background: #0d1b2e; color: #fff; }
+    .ftextarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+
+    .fsbumit-wrap {
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+    .btn-submit {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      background: var(--cyan);
+      color: #fff; font-weight: 700; font-size: 1.05rem;
+      padding: 1.15rem 3rem;
+      border-radius: 8px; border: none;
+      cursor: pointer;
+      transition: all .3s var(--ease-out);
+      font-family: inherit;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 4px 20px rgba(74,158,255,.25);
+    }
+    .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(74,158,255,.4); }
+
+    .trust-assurance {
+      margin-top: 1.5rem;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      font-size: .85rem; color: rgba(240,244,255,.5);
+    }
+    .trust-assurance svg { fill: var(--cyan); width: 16px; height: 16px; }
+
+    @media(max-width: 768px) {
+      .qform-layout { padding: 2.5rem 1.75rem; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    
+    .cursor, .cursor-follower { display: none; }
+    @media (pointer: fine) { .cursor, .cursor-follower { display: block; } }
+  </style>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.livanerenovation.com/quote" />
+  <meta property="og:title" content="Request a Quote | Livane Renovation" />
+  <meta property="og:description" content="Request a renovation quote from Livane Renovation for tile installation, kitchen remodeling, bathroom remodeling, patio remodeling, floor restoration, and interior finish work across South Florida." />
+  <meta property="og:image" content="https://www.livanerenovation.com/hero_lobby.png" />
+  <meta property="og:site_name" content="Livane Renovation" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script id="livane-entity-graph" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.livanerenovation.com/quote#webpage","url":"https://www.livanerenovation.com/quote","name":"Request a Quote | Livane Renovation","description":"Request a renovation quote from Livane Renovation for tile installation, kitchen remodeling, bathroom remodeling, patio remodeling, floor restoration, and interior finish work across South Florida.","isPartOf":{"@id":"https://www.livanerenovation.com/#website"},"about":{"@id":"https://www.livanerenovation.com/#localbusiness"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://www.livanerenovation.com/quote#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.livanerenovation.com/"},{"@type":"ListItem","position":2,"name":"Request a Quote","item":"https://www.livanerenovation.com/quote"}]}]}</script>
+  <link rel="stylesheet" href="./art.css" />
+
+<style id="quote-plus">.quote-knowledge{padding:0 0 5rem}.quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:1100px;margin:2rem auto 0}.quote-card{background:var(--navy-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;color:rgba(240,244,255,.72)}.quote-card h2,.quote-card h3{font-family:var(--font-d);color:var(--white);margin:0 0 .75rem}.quote-card p,.quote-card li{line-height:1.75}.quote-card ul{padding-left:1.1rem}.quote-card details{border-top:1px solid var(--border);padding:.9rem 0}.quote-card details:first-of-type{border-top:0;padding-top:0}.quote-card summary{cursor:pointer;color:var(--white);font-weight:600}@media(max-width:768px){.quote-grid{grid-template-columns:1fr}}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet"><link rel="stylesheet" href="./v71-site.css"></head>
+<body class="v71-page">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5VFTHZX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <header class="nav-header" id="nav-header">
+    <div class="nav-container">
+      <a href="./index.html" class="nav-logo" id="nav-logo">
+        <img src="./livane_logo.png" alt="Livane Renovation" class="site-logo-img" />
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="./renovation.html" class="nav-link">Renovation</a>
+        <a href="./project-support.html" class="nav-link">Project Coordination</a>
+        <a href="./interior-door-installation.html" class="nav-link">Doors &amp; Finishes</a>
+        <a href="./materials.html" class="nav-link">Materials</a>
+        <a href="./about.html" class="nav-link">About</a>
+        <a href="./references.html" class="nav-link">References</a>
+        <a href="./quote.html" class="btn-nav">Get a Quote</a>
+      </nav>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="mob-nav" id="mob-nav">
+    <button class="mob-close" id="mob-close">x</button>
+    <a href="./renovation.html" class="mob-link">Renovation</a>
+        <a href="./project-support.html" class="mob-link">Project Coordination</a>
+        <a href="./interior-door-installation.html" class="mob-link">Doors &amp; Finishes</a>
+        <a href="./materials.html" class="mob-link">Materials</a>
+    <a href="./about.html" class="mob-link">About</a>
+    <a href="./references.html" class="mob-link">References</a>
+    <a href="./quote.html" class="mob-link mob-cta">Get a Quote</a>
+  </div>
+  <div class="mob-overlay" id="mob-overlay"></div>
+
+  <section class="qhero">
+    <div class="container">
+      <div class="qhero-inner">
+        <h1>Request a Quote</h1>
+        <p>Tell us what you want to improve, restore, or remodel. We review the scope and respond with a practical next step.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="qbody">
+    <div class="container">
+      <div style="max-width:900px;margin:0 auto 2rem;padding:1.5rem 1.75rem;background:var(--navy-card);border:1px solid var(--border);border-radius:12px;color:rgba(240,244,255,.68);line-height:1.7">
+        <strong style="display:block;color:var(--white);margin-bottom:.45rem">What helps us price your project</strong>
+        Share the service needed, approximate square footage, property location, timing, and a short description of current conditions. Photos are helpful for the first review. For complex remodeling, occupied homes, managed properties, or multi-scope work, we may schedule a South Florida site visit before finalizing the proposal. Livane Renovation supports homeowners, property owners, managers, builders, and project teams across Miami-Dade, Fort Lauderdale, and Broward County.
+      </div>
+      <div class="qform-layout">
+        <form action="https://formsubmit.co/onur@livanerenovation.com" method="POST" id="mainQuoteForm">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="New Livane Renovation Quote Request">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://www.livanerenovation.com/thank-you.html">
+
+          <div class="form-grid">
+            
+            <div class="fg">
+              <label class="flabel" for="fullName">Full Name <span class="req">*</span></label>
+              <input class="finput" type="text" id="fullName" name="name" placeholder="John Doe" required="required">
+            </div>
+            
+            <div class="fg">
+              <label class="flabel" for="phone">Phone Number <span class="req">*</span></label>
+              <input class="finput" type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required="required">
+            </div>
+            
+            <div class="fg full-width">
+              <label class="flabel" for="email">Email Address <span class="req">*</span></label>
+              <input class="finput" type="email" id="email" name="email" placeholder="john@company.com" required="required">
+            </div>
+
+            <div class="fg">
+              <label class="flabel" for="service">Service Needed</label>
+              <select class="fselect" id="service" name="service">
+                <option value="" disabled selected>Select service type</option>
+                <option value="Tile Installation">Tile Installation</option>
+                <option value="Kitchen Remodeling">Kitchen Remodeling</option>
+                <option value="Bathroom Remodeling">Bathroom Remodeling</option>
+                <option value="Patio Remodeling">Patio Remodeling</option>
+                <option value="Floor Polishing & Restoration">Floor Polishing & Restoration</option>
+                <option value="Renovation & Interior Finish">Renovation & Interior Finish</option>
+                <option value="Exterior Surface Services">Exterior Surface Services</option>
+                <option value="Renovation Support / Multi-Scope">Renovation Support / Multi-Scope</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="fg">
+              <label class="flabel" for="projectLocation">Project Location (City)</label>
+              <input class="finput" type="text" id="projectLocation" name="project_location" placeholder="e.g., Miami, Fort Lauderdale">
+            </div>
+
+            <div class="fg full-width">
+              <label class="flabel" for="message">Project Details / Message</label>
+              <textarea class="ftextarea" id="message" name="message" placeholder="Please describe your project, current surface conditions, and any specific requirements..."></textarea>
+            </div>
+
+          </div>
+
+          <div class="fsbumit-wrap">
+            <button type="submit" class="btn-submit">Submit Request</button>
+            <div class="trust-assurance">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM12 2C8.6 2 5.5 3 2.5 4v9c0 6.6 6.5 10 9.5 10.5 3-.5 9.5-3.9 9.5-10.5V4C18.5 3 15.4 2 12 2zm-1.8 13.8L6.4 12l1.4-1.4 2.4 2.4 6-6 1.4 1.4-7.4 7.4z"/></svg>
+              <span>Your information is secure and never shared.</span>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+<div class="quote-knowledge"><div class="container"><div class="quote-grid"><article class="quote-card"><h2>What helps us respond faster</h2><ul><li>Clear photos and approximate square footage</li><li>Project city and property type</li><li>Service needed or scope combination</li><li>Current condition and main problem to solve</li><li>Timing, access limitations and occupancy status</li><li>Any plans, finish schedule or inspiration images</li></ul></article><article class="quote-card"><h2>How Livane reviews a request</h2><p>Small or clear scopes can often start with photos and a preliminary review. Larger remodeling, restoration or multi-scope work may require a site visit, product review or a more detailed scope conversation before final pricing.</p><ul><li>Photo and condition review</li><li>Scope alignment and missing information</li><li>Site review when needed</li><li>Method, material and sequencing definition</li><li>Proposal or next-step response</li></ul></article></div><div class="quote-grid"><article class="quote-card"><h2>Typical service categories clients request</h2><ul><li>Tile and stone installation</li><li>Bathroom and kitchen remodeling</li><li>Patio remodeling and exterior surface work</li><li>Floor polishing, restoration and sealing</li><li>Interior door and millwork installation</li><li>Tenant improvement and project coordination</li></ul></article><article class="quote-card"><h2>Quote page FAQ</h2><details><summary>Can I send a multi-scope project?</summary><p>Yes. If the project includes several related scopes, note each one in the message so the review can be approached as one coordinated package instead of separate isolated requests.</p></details><details><summary>Do I need exact measurements before contacting Livane?</summary><p>No. Approximate square footage helps, but the first message can start with photos, a rough size and a clear description of the work needed.</p></details><details><summary>Do you work outside Miami-Dade and Broward?</summary><p>Selected Palm Beach projects can be considered when the scope, logistics and schedule fit. The strongest core service area remains Miami-Dade and Broward.</p></details></article></div></div></div>
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer" id="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="./livane_logo.png" alt="Livane Renovation" class="site-logo-img" />
+        </div>
+        <p class="footer-tagline">Renovation, floor restoration, interior finish work, and exterior surface services for homes, businesses, and managed properties across South Florida.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Services</p>
+        <a href="./floor-restoration.html" class="footer-link" id="fl1">Floor Polishing &amp; Restoration</a>
+        <a href="./renovation.html" class="footer-link" id="fl2">Renovation &amp; Interior Finish</a>
+        <a href="./exterior.html" class="footer-link" id="fl3">Exterior Surface Services</a>
+        <a href="./project-support.html" class="footer-link" id="fl4">Renovation Support</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Company</p>
+        <a href="./about.html" class="footer-link" id="fl5">About</a>
+        <a href="./references.html" class="footer-link">References</a>
+        <a href="#process" class="footer-link" id="fl6">How We Work</a>
+        <a href="#service-area" class="footer-link" id="fl7">Service Area</a>
+        <a href="./quote.html" class="footer-link" id="fl8">Contact</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Contact</p>
+        <a href="mailto:onur@livanerenovation.com" class="footer-link footer-link--accent" id="fl9">onur@livanerenovation.com</a>
+        <a href="tel:+14074595565" class="footer-link" id="fl10">(407) 459-5565</a>
+        <p class="footer-area-text">Miami-Dade · Broward · Palm Beach</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© <span id="yr"></span> Livane Renovation. All rights reserved.</p>
+        <p>Renovation &amp; Restoration Services · South Florida</p>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="main.js"></script>
+  <script src="./art.js"></script>
+<script src="./v71-site.js"></script></body>
+</html>

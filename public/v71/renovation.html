@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="./livane_logo.png" />
+  <link rel="icon" type="image/png" href="./livane_logo.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="./livane_logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Renovation & Remodeling Services South Florida | Livane</title>
+  <meta name="description"
+    content="Interior door installation, millwork, finish carpentry, and carpet replacement for homes, workplaces, and managed spaces in Miami and Fort Lauderdale. Livane Renovation — South Florida." />
+  <meta name="keywords"
+    content="renovation Miami, interior door installation Miami, millwork installation Fort Lauderdale, tenant improvement South Florida, finish carpentry Miami, carpet installation commercial Miami, renovation company Florida" />
+  <meta name="author" content="Livane Renovation" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Outfit:wght@300;400;500;600;700;800;900&family=Dancing+Script:wght@700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .inner-hero {
+      position: relative;
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden
+    }
+
+    .inner-hero-bg {
+      position: absolute;
+      inset: 0
+    }
+
+    .inner-hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%
+    }
+
+    .inner-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, rgba(8, 15, 26, .95) 0%, rgba(8, 15, 26, .72) 55%, rgba(8, 15, 26, .3) 100%)
+    }
+
+    .inner-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 9rem 0 5rem
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .72rem;
+      color: rgba(255, 255, 255, .3);
+      margin-bottom: 1.5rem;
+      letter-spacing: .04em
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, .4);
+      transition: color .15s
+    }
+
+    .breadcrumb a:hover {
+      color: var(--cyan)
+    }
+
+    .breadcrumb-sep {
+      color: rgba(255, 255, 255, .15)
+    }
+
+    .inner-h1 {
+      font-family: var(--font-d);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -.03em;
+      color: var(--white);
+      max-width: 780px;
+      margin-bottom: 1.25rem
+    }
+
+    .inner-sub {
+      font-size: 1.05rem;
+      color: rgba(240, 244, 255, .6);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem
+    }
+
+    .area-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: 2rem
+    }
+
+    .area-pill {
+      background: rgba(74, 158, 255, .08);
+      border: 1px solid rgba(74, 158, 255, .15);
+      color: rgba(74, 158, 255, .8);
+      font-size: .73rem;
+      font-weight: 500;
+      padding: .35rem .9rem;
+      border-radius: 100px;
+      letter-spacing: .04em
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem
+    }
+
+    .svc-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s, transform .45s var(--ease-out)
+    }
+
+    .svc-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity .3s
+    }
+
+    .svc-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px)
+    }
+
+    .svc-card:hover::before {
+      opacity: 1
+    }
+
+    .svc-card-num {
+      font-family: var(--font-d);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, .04);
+      line-height: 1;
+      margin-bottom: .5rem
+    }
+
+    .svc-card h3 {
+      font-family: var(--font-d);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .5rem
+    }
+
+    .svc-card p {
+      font-size: .83rem;
+      color: rgba(240, 244, 255, .5);
+      line-height: 1.6
+    }
+
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center
+    }
+
+    .split-left h2 {
+      font-family: var(--font-d);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+      line-height: 1.1
+    }
+
+    .split-left p {
+      font-size: .93rem;
+      color: rgba(240, 244, 255, .55);
+      line-height: 1.75;
+      margin-bottom: 1.25rem
+    }
+
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+      margin-top: 1.5rem
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .88rem;
+      color: rgba(240, 244, 255, .65)
+    }
+
+    .check-icon {
+      color: var(--cyan);
+      flex-shrink: 0;
+      margin-top: .1em;
+      font-weight: 700
+    }
+
+    .target-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem
+    }
+
+    .target-box {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem
+    }
+
+    .target-box h4 {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .35rem
+    }
+
+    .target-box p {
+      font-size: .78rem;
+      color: rgba(240, 244, 255, .4);
+      line-height: 1.5
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem
+    }
+
+    .pstep {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color .3s
+    }
+
+    .pstep:hover {
+      border-color: var(--border-hover)
+    }
+
+    .pstep-num {
+      font-family: var(--font-d);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, .05);
+      line-height: 1;
+      margin-bottom: .75rem
+    }
+
+    .pstep h3 {
+      font-family: var(--font-d);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: .5rem
+    }
+
+    .pstep p {
+      font-size: .82rem;
+      color: rgba(240, 244, 255, .45);
+      line-height: 1.55
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      margin-top: 3rem;
+      max-width: 820px
+    }
+
+    .faq-item {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color .3s
+    }
+
+    .faq-item:hover {
+      border-color: var(--border-hover)
+    }
+
+    .faq-q {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--white);
+      padding: 1.4rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem
+    }
+
+    .faq-icon {
+      color: var(--cyan);
+      font-size: 1.1rem;
+      flex-shrink: 0
+    }
+
+    .faq-a {
+      font-size: .88rem;
+      color: rgba(240, 244, 255, .55);
+      line-height: 1.7;
+      padding: 0 1.75rem 1.4rem
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem
+    }
+
+    .related-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: all .3s var(--ease-out);
+      text-decoration: none;
+      color: inherit
+    }
+
+    .related-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px)
+    }
+
+    .related-card h3 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .35rem
+    }
+
+    .related-card p {
+      font-size: .78rem;
+      color: rgba(240, 244, 255, .4);
+      line-height: 1.5
+    }
+
+    .related-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0
+    }
+
+    @media(max-width:900px) {
+      .service-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .split-section {
+        grid-template-columns: 1fr
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .related-grid {
+        grid-template-columns: 1fr
+      }
+
+      .target-grid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    @media(max-width:580px) {
+      .service-grid {
+        grid-template-columns: 1fr
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr
+      }
+
+      .target-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* ── Project Gallery ── */
+    .projects-section {
+      background: var(--navy-deep);
+      padding: 7rem 0;
+      border-top: 1px solid var(--border)
+    }
+
+    .projects-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 4rem
+    }
+
+    .projects-header h2 {
+      font-family: var(--font-d);
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: .85rem
+    }
+
+    .projects-header p {
+      font-size: .93rem;
+      color: rgba(240, 244, 255, .5);
+      line-height: 1.75
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 320px 280px;
+      gap: 1rem
+    }
+
+    .proj-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    .proj-card--wide {
+      grid-column: 1/3
+    }
+
+    .proj-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .75s var(--ease-out)
+    }
+
+    .proj-card:hover img {
+      transform: scale(1.06)
+    }
+
+    .proj-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8, 15, 26, .96) 0%, rgba(8, 15, 26, .4) 50%, transparent 100%);
+      transition: opacity .4s
+    }
+
+    .proj-card:hover .proj-overlay {
+      opacity: .85
+    }
+
+    .proj-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 1.75rem
+    }
+
+    .proj-tag {
+      display: inline-block;
+      background: rgba(74, 158, 255, .15);
+      border: 1px solid rgba(74, 158, 255, .3);
+      color: var(--cyan);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .28rem .75rem;
+      border-radius: 100px;
+      margin-bottom: .6rem
+    }
+
+    .proj-title {
+      font-family: var(--font-d);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .3rem;
+      line-height: 1.25
+    }
+
+    .proj-desc {
+      font-size: .78rem;
+      color: rgba(240, 244, 255, .6);
+      line-height: 1.5;
+      max-width: 380px
+    }
+
+    @media(max-width:700px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto
+      }
+
+      .proj-card {
+        height: 260px
+      }
+
+      .proj-card--wide {
+        grid-column: auto;
+        height: 240px
+      }
+    }
+  </style>
+  <meta name="robots" content="index, follow" />
+  <meta name="geo.region" content="US-FL" />
+  <meta name="geo.placename" content="Miami, Florida" />
+  <link rel="canonical" href="https://www.livanerenovation.com/renovation" />
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@graph": [{
+      "@type": "Service",
+      "name": "Renovation & Interior Finish",
+      "provider": {"@type": "Organization","name": "Livane Renovation","url": "https://www.livanerenovation.com"},
+      "areaServed": [{"@type": "City","name": "Miami"},{"@type": "City","name": "Fort Lauderdale"}],
+      "description": "Interior door installation, millwork, finish carpentry, carpet installation, and tenant improvement services for homes, businesses, and managed properties in South Florida.",
+      "serviceType": ["Door Installation","Millwork & Trim","Carpet Installation","Finish Carpentry","Tenant Improvement"]
+    }]}
+  </script>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.livanerenovation.com/renovation" />
+  <meta property="og:title" content="Renovation & Remodeling Services South Florida | Livane" />
+  <meta property="og:description" content="Interior door installation, millwork, finish carpentry, and carpet replacement for homes, workplaces, and managed spaces in Miami and Fort Lauderdale. Livane Renovation — South Florida." />
+  <meta property="og:image" content="https://www.livanerenovation.com/renovation_interior.png" />
+  <meta property="og:site_name" content="Livane Renovation" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script id="livane-entity-graph" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.livanerenovation.com/renovation#webpage","url":"https://www.livanerenovation.com/renovation","name":"Renovation & Remodeling Services South Florida | Livane","description":"Interior door installation, millwork, finish carpentry, and carpet replacement for homes, workplaces, and managed spaces in Miami and Fort Lauderdale. Livane Renovation — South Florida.","isPartOf":{"@id":"https://www.livanerenovation.com/#website"},"about":{"@id":"https://www.livanerenovation.com/#localbusiness"},"inLanguage":"en-US"},{"@type":"Service","@id":"https://www.livanerenovation.com/renovation#service","name":"Renovation Services","serviceType":"Renovation Services","description":"Interior door installation, millwork, finish carpentry, and carpet replacement for homes, workplaces, and managed spaces in Miami and Fort Lauderdale. Livane Renovation — South Florida.","url":"https://www.livanerenovation.com/renovation","provider":{"@type":"HomeAndConstructionBusiness","@id":"https://www.livanerenovation.com/#localbusiness","name":"Livane Renovation","url":"https://www.livanerenovation.com"},"areaServed":[{"@type":"AdministrativeArea","name":"Miami-Dade County"},{"@type":"AdministrativeArea","name":"Broward County"},{"@type":"AdministrativeArea","name":"Palm Beach County"},{"@type":"AdministrativeArea","name":"South Florida"}]},{"@type":"BreadcrumbList","@id":"https://www.livanerenovation.com/renovation#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.livanerenovation.com/"},{"@type":"ListItem","position":2,"name":"Renovation Services","item":"https://www.livanerenovation.com/renovation"}]}]}</script>
+  <link rel="stylesheet" href="./art.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet"><link rel="stylesheet" href="./v71-site.css"></head>
+
+<body class="v71-page">
+  
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+  <header class="nav-header" id="nav-header">
+    <div class="nav-container">
+      <a href="./index.html" class="nav-logo" id="nav-logo">
+        <img src="./livane_logo.png" alt="Livane Renovation" class="site-logo-img" />
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="./renovation.html" class="nav-link">Renovation</a>
+        <a href="./project-support.html" class="nav-link">Project Coordination</a>
+        <a href="./interior-door-installation.html" class="nav-link">Doors &amp; Finishes</a>
+        <a href="./materials.html" class="nav-link">Materials</a>
+        <a href="./about.html" class="nav-link">About</a>
+        <a href="./references.html" class="nav-link">References</a>
+        <a href="./quote.html" class="btn-nav">Get a Quote</a>
+      </nav>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mob-nav" id="mob-nav">
+    <button class="mob-close" id="mob-close">x</button>
+    <a href="./renovation.html" class="mob-link">Renovation</a>
+        <a href="./project-support.html" class="mob-link">Project Coordination</a>
+        <a href="./interior-door-installation.html" class="mob-link">Doors &amp; Finishes</a>
+        <a href="./materials.html" class="mob-link">Materials</a>
+    <a href="./about.html" class="mob-link">About</a>
+    <a href="./references.html" class="mob-link">References</a>
+    <a href="./quote.html" class="mob-link mob-cta">Get a Quote</a>
+  </div>
+  <div class="mob-overlay" id="mob-overlay"></div>
+
+  <main>
+    <section class="inner-hero">
+      <div class="inner-hero-bg">
+        <img src="page_renovation_hero.png"
+          alt="Renovation in progress — interior door installation in South Florida office" />
+        <div class="inner-hero-overlay"></div>
+      </div>
+      <div class="container inner-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="./index.html">Home</a><span class="breadcrumb-sep">›</span><span>Renovation &amp; Interior Finish</span>
+        </nav>
+        <p class="label-tag">Core Service · South Florida</p>
+        <h1 class="inner-h1">Remodeling &amp; Renovation Services in South Florida</h1>
+        <p class="inner-sub">Tile installation, kitchen remodeling, bathroom remodeling, and patio remodeling lead our renovation work, supported by practical finish work and tenant improvement services.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="./quote.html" class="btn-primary" id="hero-cta1">Request a Quote</a>
+          <a href="#services" class="btn-ghost" id="hero-cta2">See Our Services</a>
+        </div>
+        <div class="area-pills">
+          <span class="area-pill">Miami-Dade County</span>
+          <span class="area-pill">Fort Lauderdale</span>
+          <span class="area-pill">Broward County</span>
+          <span class="area-pill">South Florida</span>
+        </div>
+      </div>
+    </section>
+
+        <div style="margin-top:2rem;padding:1.5rem;border:1px solid var(--border);border-radius:12px;background:var(--navy-card)">
+          <p style="color:rgba(240,244,255,.68);line-height:1.75;margin:0">Our current remodeling focus is <a href="./tile-installation.html">tile installation</a>, <a href="./kitchen-remodeling.html">kitchen remodeling</a>, <a href="./bathroom-remodeling.html">bathroom remodeling</a>, and <a href="./patio-remodeling.html">patio remodeling</a>. For interiors and managed properties, we also coordinate <a href="./interior-door-installation.html">door replacement</a>, <a href="./millwork-installation.html">architectural millwork</a>, <a href="./carpet-installation.html">carpet installation</a>, <a href="./epoxy-flooring.html">epoxy flooring</a>, <a href="./floor-polishing.html">floor polishing</a>, and <a href="./tenant-improvement.html">tenant improvement scopes</a>.</p>
+        </div>
+    <!-- PROJECTS GALLERY -->
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <div class="projects-header">
+          <p class="label-tag label-tag--light">Completed Projects</p>
+          <h2>Renovation Work Across South Florida Homes, Businesses, and Managed Properties</h2>
+          <p>From door installations to full tenant improvement finishes — executed cleanly and on schedule.</p>
+        </div>
+        <div class="projects-grid">
+
+          <!-- Card 1: Door Installation -->
+          <a href="./interior-door-installation.html" style="text-decoration: none; color: inherit; display: contents;">
+            <div class="proj-card" id="pg1">
+              <img src="renov_door_install.png" alt="Commercial door installation in South Florida office corridor" />
+              <div class="proj-overlay"></div>
+              <div class="proj-info">
+                <span class="proj-tag">Door Installation</span>
+                <p class="proj-title">Commercial Corridor — Interior Door Replacement</p>
+                <p class="proj-desc">Solid-core door installation with hardware and trim finish across a 3-floor office
+                  building in Fort Lauderdale.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 2: Tenant Improvement -->
+          <a href="./tenant-improvement.html" style="text-decoration: none; color: inherit; display: contents;">
+            <div class="proj-card" id="pg2">
+              <img src="renov_tenant_improvement.png"
+                alt="Tenant improvement renovation, South Florida office complete" />
+              <div class="proj-overlay"></div>
+              <div class="proj-info">
+                <span class="proj-tag">Tenant Improvement</span>
+                <p class="proj-title">Open-Plan Office — Full Interior Finish Package</p>
+                <p class="proj-desc">Millwork accent wall, new ceiling, carpet installation, and all interior finish
+                  work for a 5,500 sq ft office TI in Miami-Dade.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 3: Wide — Millwork Reception -->
+          <a href="./millwork-installation.html" style="text-decoration: none; color: inherit; display: contents;">
+            <div class="proj-card proj-card--wide" id="pg3" style="height:300px">
+              <img src="renov_millwork_trim.png"
+                alt="Custom millwork and trim installation in South Florida commercial lobby" />
+              <div class="proj-overlay"></div>
+              <div class="proj-info">
+                <span class="proj-tag">Millwork &amp; Trim</span>
+                <p class="proj-title">Luxury Reception — Custom Millwork &amp; Crown Molding Package</p>
+                <p class="proj-desc">Full millwork installation including wainscoting, crown molding, and custom
+                  reception desk cabinetry in a Broward County property. Coordinated with marble floor
+                  restoration in the same scope.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 5: Epoxy Flooring -->
+          <a href="./epoxy-flooring.html" style="text-decoration:none; color:inherit; display:contents;">
+            <div class="proj-card proj-card--wide" id="pg5" style="height:280px; background-image:url('/nx123456.jpeg'); background-size:cover; background-position:center;">
+              <div class="proj-overlay"></div>
+              <div class="proj-info">
+                <span class="proj-tag">FLOOR SYSTEMS</span>
+                <h3 class="proj-title">Epoxy Flooring — Seamless Surface Systems</h3>
+                <p class="proj-desc">High-performance epoxy flooring installed with industrial preparation standards for maximum durability.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 4: Carpet Installation -->
+          <a href="./carpet-installation.html" style="text-decoration: none; color: inherit; display: contents;">
+            <div class="proj-card proj-card--wide" id="pg4" style="height:280px">
+              <img src="renov_carpet_install.png"
+                alt="Commercial carpet tile installation in South Florida modern office" />
+              <div class="proj-overlay"></div>
+              <div class="proj-info">
+                <span class="proj-tag">Carpet Installation</span>
+                <p class="proj-title">High-Rise Office — Commercial Carpet Tile, 8,200 sq ft</p>
+                <p class="proj-desc">Full removal of existing flooring and installation of geometric charcoal carpet
+                  tiles across two floors of a Fort Lauderdale high-rise. Completed around active tenant schedules.</p>
+              </div>
+            </div>
+          </a>
+      </div>
+      <div style="text-align:center;margin-top:3rem">
+        <a href="./projects.html" class="btn-primary btn-lg" id="projects-cta">View Documented Projects</a>
+      </div>
+      </div>
+
+      <section class="section" id="services" style="background:var(--navy)">
+        <div class="container">
+          <div class="reveal-fade" data-d="0">
+            <p class="label-tag">What We Provide</p>
+            <h2 class="section-title">Renovation Support Scopes for Homes, Businesses, and Managed Properties.</h2>
+            <p class="section-sub">Practical interior improvement work for homeowners, property owners, builders, and project teams
+              who need finish-stage scopes handled with one coordinated partner.</p>
+          </div>
+          <div class="service-grid">
+            <div class="svc-card reveal-up" data-d="0" id="sv1">
+              <div class="svc-card-num">01</div>
+              <h3>Interior Door Installation &amp; Replacement</h3>
+              <p>Professional-grade interior door installation including hollow-core, solid-core, and glass panel doors.
+                We handle framing, hardware, and finish trim as part of the scope.</p>
+            </div>
+            <div class="svc-card reveal-up" data-d="80" id="sv2">
+              <div class="svc-card-num">02</div>
+              <h3>Millwork &amp; Trim Installation</h3>
+              <p>Interior millwork installation — baseboard, casing, chair rail, and architectural trim elements. We
+                execute finish-stage trim work that elevates the presentation of homes, businesses, and managed interiors.</p>
+            </div>
+            <div class="svc-card reveal-up" data-d="160" id="sv3">
+              <div class="svc-card-num">03</div>
+              <h3>Finish Carpentry Support</h3>
+              <p>Finish-level carpentry scopes for tenant improvement and renovation projects. We support builders
+                and property teams with accurate, detail-oriented installation work.</p>
+            </div>
+            <div class="svc-card reveal-up" data-d="0" id="sv4">
+              <div class="svc-card-num">04</div>
+              <h3>Carpet Installation &amp; Replacement</h3>
+              <p>Commercial carpet removal and installation for offices, corridors, and multi-tenant spaces. We work on
+                occupied commercial schedules and provide proper substrate preparation.</p>
+            </div>
+            <div class="svc-card reveal-up" data-d="80" id="sv5">
+              <div class="svc-card-num">05</div>
+              <h3>Renovation Coordination</h3>
+              <p>When renovation involves multiple related scopes, we coordinate the sequencing and execution across
+                surface work, installations, and property improvement items under one relationship.</p>
+            </div>
+            <div class="svc-card reveal-up" data-d="160" id="sv6">
+              <div class="svc-card-num">06</div>
+              <h3>Tenant Improvement Support</h3>
+              <p>Finish-stage TI support for landlords, property owners and managers, and builders bringing homes, workplaces, and managed spaces into
+                usable condition. We handle what others fragment across multiple vendors.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="who" style="background:var(--navy-mid);border-top:1px solid var(--border)">
+        <div class="container">
+          <div class="split-section">
+            <div class="split-left reveal-up" data-d="0">
+              <p class="label-tag">Who We Serve</p>
+              <h2>Built for Property Owners, Builders, and Project Teams.</h2>
+              <p>Livane Renovation provides renovation support to the owners, builders, and property teams who need
+                finish-stage work handled without the complexity of managing multiple small vendors. Our work fits
+                naturally into TI projects, property upgrades, and property improvement scopes.</p>
+              <p>We don't overstate our scope. We don't pretend to be a full general contractor. We execute the
+                practical interior improvement work that needs to get done — cleanly and on schedule.</p>
+              <div class="check-list">
+                <div class="check-item"><span class="check-icon">✓</span><span>Owners and managers coordinating property refresh projects</span></div>
+                <div class="check-item"><span class="check-icon">✓</span><span>Builders who need reliable finish-scope support</span></div>
+                <div class="check-item"><span class="check-icon">✓</span><span>Building owners managing tenant
+                    improvement work</span></div>
+                <div class="check-item"><span class="check-icon">✓</span><span>Property owners upgrading homes, workplaces, and managed spaces</span></div>
+              </div>
+              <div style="margin-top:2.5rem">
+                <a href="./quote.html" class="btn-primary" id="who-cta">Discuss Your Scope</a>
+              </div>
+            </div>
+            <div class="reveal-up" data-d="150">
+              <div style="background:var(--navy-card);border:1px solid var(--border);border-radius:12px;padding:2.5rem">
+                <p class="label-tag">Key Advantages</p>
+                <div class="check-list">
+                  <div class="check-item"><span class="check-icon">→</span><span>One partner for multiple related
+                      interior scopes</span></div>
+                  <div class="check-item"><span class="check-icon">→</span><span>No overcommitting outside our actual
+                      capability</span></div>
+                  <div class="check-item"><span class="check-icon">→</span><span>Scope clarity before any work
+                      begins</span></div>
+                  <div class="check-item"><span class="check-icon">→</span><span>Schedule-aware execution for occupied
+                      homes, workplaces, and managed spaces</span></div>
+                  <div class="check-item"><span class="check-icon">→</span><span>Can be paired with floor restoration
+                      for combined scope</span></div>
+                  <div class="check-item"><span class="check-icon">→</span><span>South Florida focus — Miami, Fort
+                      Lauderdale, Broward</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="process" style="background:var(--navy-deep)">
+        <div class="container">
+          <div class="reveal-fade" data-d="0">
+            <p class="label-tag label-tag--light">How We Work</p>
+            <h2 class="section-title section-title--light">Define the Scope. Execute Cleanly. Deliver on Schedule.</h2>
+          </div>
+          <div class="process-steps">
+            <div class="pstep reveal-up" data-d="0" id="pp1">
+              <div class="pstep-num">01</div>
+              <h3>Scope Review</h3>
+              <p>Share photos, layouts, and a description of what needs to be done. We clarify what falls within our
+                capability before committing to anything.</p>
+            </div>
+            <div class="pstep reveal-up" data-d="100" id="pp2">
+              <div class="pstep-num">02</div>
+              <h3>Site Visit if Needed</h3>
+              <p>For multi-scope or complex projects, we conduct a site visit to measure, assess conditions, and provide
+                accurate pricing tied to real field conditions.</p>
+            </div>
+            <div class="pstep reveal-up" data-d="200" id="pp3">
+              <div class="pstep-num">03</div>
+              <h3>Scope &amp; Timeline Agreement</h3>
+              <p>We define the exact scope, material specifications, access requirements, and timeline before
+                mobilizing. No surprises mid-project.</p>
+            </div>
+            <div class="pstep reveal-up" data-d="300" id="pp4">
+              <div class="pstep-num">04</div>
+              <h3>Execution &amp; Delivery</h3>
+              <p>We execute the work with trained installers using professional-grade materials and methods. Site is left
+                clean with the scope delivered as defined.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </section>
+
+    <section class="section" id="faq" style="background:var(--navy)">
+      <div class="container">
+        <div class="reveal-fade" data-d="0">
+          <p class="label-tag">Common Questions</p>
+          <h2 class="section-title">Renovation &amp; Interior Finish — Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal-up" data-d="0" id="fq1">
+            <div class="faq-q">Do you handle interior door installation in homes, workplaces, and managed spaces?<span
+                class="faq-icon">+</span></div>
+            <div class="faq-a">Yes. We install and replace interior commercial doors including hollow-core, solid-core,
+              and glass panel configurations in offices, corridors, and TI projects across South Florida. We include
+              hardware and trim finish as part of the scope.</div>
+          </div>
+          <div class="faq-item reveal-up" data-d="80" id="fq2">
+            <div class="faq-q">What exactly is renovation support for homes, businesses, and managed properties?<span
+                class="faq-icon">+</span></div>
+            <div class="faq-a">Renovation support means handling finish-stage improvement scopes — door
+              installation, millwork, trim, carpet replacement — within a broader improvement project. Livane Renovation
+              Group coordinates these scopes so property owners and managers and builders work with one partner instead of multiple
+              vendors.</div>
+          </div>
+          <div class="faq-item reveal-up" data-d="160" id="fq3">
+            <div class="faq-q">Do you install carpet in commercial offices in Miami-Dade or Broward?<span
+                class="faq-icon">+</span></div>
+            <div class="faq-a">Yes. We provide commercial carpet installation and replacement for offices, corridors,
+              and multi-tenant spaces across Miami-Dade and Broward County. We work around occupied-space access
+              requirements when needed.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="related" style="background:var(--navy-mid);border-top:1px solid var(--border)">
+      <div class="container">
+        <p class="label-tag">Other Services</p>
+        <h2 class="section-title">More from Livane Renovation</h2>
+        <div class="related-grid">
+          <a href="./floor-restoration.html" class="related-card reveal-up" data-d="0" id="rc1"><span
+              class="related-icon">◈</span>
+            <div>
+              <h3>Floor Polishing &amp; Restoration</h3>
+              <p>Concrete, marble, terrazzo, stone, and tile restoration for South Florida homes, businesses, and managed properties.</p>
+            </div>
+          </a>
+          <a href="./exterior.html" class="related-card reveal-up" data-d="100" id="rc2"><span class="related-icon">🏗️</span>
+            <div>
+              <h3>Exterior Surface Services</h3>
+              <p>Pressure washing, paver sealing, and pool deck restoration across South Florida.</p>
+            </div>
+          </a>
+          <a href="./project-support.html" class="related-card reveal-up" data-d="200" id="rc3"><span
+              class="related-icon">📋</span>
+            <div>
+              <h3>Renovation Support</h3>
+              <p>Multi-scope coordination and packaged commercial solutions for property teams.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact"
+      style="background:var(--navy-deep);border-top:1px solid var(--border);text-align:center">
+      <div class="container reveal-up" data-d="0">
+        <p class="label-tag label-tag--cyan">Get Started</p>
+        <h2 class="section-title">Ready to Define Your Renovation Scope?</h2>
+        <p class="section-sub" style="margin:0 auto 2.5rem">Share photos and describe the space. Livane Renovation
+          will review and respond with a structured plan — not a generic estimate.</p>
+        <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
+          <a href="./quote.html" class="btn-primary btn-lg" id="cta-email">Request a Quote</a>
+          <a href="tel:+14074595565" class="btn-outline-white btn-lg" id="cta-phone">Call Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="./livane_logo.png" alt="Livane Renovation" class="site-logo-img" />
+        </div>
+        <p class="footer-tagline">Renovation, floor restoration, interior finish support, and exterior
+          surface services across South Florida.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Services</p><a href="./floor-restoration.html" class="footer-link">Floor Polishing
+          &amp; Restoration</a><a href="./renovation.html" class="footer-link">Renovation &amp; Interior Finish</a><a
+          href="./exterior.html" class="footer-link">Exterior Surface Services</a><a href="./project-support.html"
+          class="footer-link">Renovation Support</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Company</p><a href="./about.html" class="footer-link">About</a><a
+          href="./references.html" class="footer-link">References</a><a href="./index.html#process" class="footer-link">How
+          We Work</a><a href="./index.html#service-area" class="footer-link">Service Area</a><a href="./quote.html"
+          class="footer-link">Contact</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Contact</p><a href="mailto:onur@livanerenovation.com"
+          class="footer-link footer-link--accent">onur@livanerenovation.com</a><a href="tel:+14074595565"
+          class="footer-link">(407) 459-5565</a>
+        <p class="footer-area-text">Miami-Dade · Broward · Palm Beach</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© <span id="yr"></span> Livane Renovation. All rights reserved.</p>
+        <p>Renovation &amp; Restoration · South Florida</p>
+      </div>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+  <script src="./art.js"></script>
+<script src="./v71-site.js"></script></body>
+
+</html>
