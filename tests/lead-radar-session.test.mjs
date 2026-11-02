@@ -1,0 +1,13 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {accountsConfigured,authenticateStaff,issueStaffSession,verifyStaffToken,sessionFromRequest,cookieFor} from '../src/lib/lead-radar/session.js';
+process.env.LIVANE_ONUR_PASSWORD='only-a-private-onur-test-password';
+process.env.LIVANE_SEMIH_PASSWORD='only-a-private-semih-test-password';
+process.env.LIVANE_SESSION_SECRET='unit-testing-only-use-a-private-secret-of-64-plus-characters-here';
+test('accounts are configured',()=>assert.equal(accountsConfigured(),true));
+test('onur is admin',()=>assert.equal(authenticateStaff('ONUR','only-a-private-onur-test-password').role,'admin'));
+test('semih is sales',()=>assert.equal(authenticateStaff('semih','only-a-private-semih-test-password').role,'sales'));
+test('wrong passwords fail',()=>assert.equal(authenticateStaff('onur','wrong'),null));
+test('tampered signature is rejected',()=>{const s=issueStaffSession({username:'onur'},10000);assert.equal(verifyStaffToken(s+'bad',10000),null);});
+test('expired sessions fail',()=>{const s=issueStaffSession({username:'semih'},10000);assert.equal(verifyStaffToken(s,10000+8*24*3600),null);});
+test('signed cookie verifies correctly',()=>{const token=issueStaffSession({username:'semih'});const req={headers:new Headers({cookie:cookieFor(token,false)})};assert.equal(sessionFromRequest(req).username,'semih')});

@@ -24,7 +24,7 @@ export async function POST(req) {
   const {data:company,error:cError}=await a.db.from('companies').select('*').eq('id',body.company_id).maybeSingle();
   if(cError||!company)return Response.json({error:'Company not found'},{status:404});
   if(body.project_id){const {data:project}=await a.db.from('projects').select('id').eq('id',body.project_id).eq('contractor_company_id',body.company_id).maybeSingle(); if(!project)return Response.json({error:'Project does not belong to company'},{status:400});}
-  const {error}=await a.db.from('activities').insert({company_id:body.company_id,project_id:body.project_id||null,user_id:a.user.id,outcome:body.outcome,note:body.note,next_followup_at:next?.toISOString()||null});
+  const {error}=await a.db.from('activities').insert({company_id:body.company_id,project_id:body.project_id||null,user_name:a.user.id,outcome:body.outcome,note:body.note,next_followup_at:next?.toISOString()||null});
   if(error)throw error;
   const {error:companyError}=await a.db.from('companies').update({contact_status:body.outcome,last_contacted_at:new Date().toISOString(),next_followup_at:next?.toISOString()||null,updated_at:new Date().toISOString()}).eq('id',company.id);
   if(companyError)throw companyError;

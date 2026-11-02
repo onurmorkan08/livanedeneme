@@ -1,21 +1,25 @@
 'use client';
-import {createClient} from '@supabase/supabase-js';
-let instance;
+
+let client;
 export function getBrowserClient(){
- if(!instance){
-  const url=process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key=process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if(!url||!key)throw new Error('Public Supabase settings missing');
-  instance=createClient(url,key);
- }
- return instance;
+ if(!client)client={auth:{
+  async getSession(){
+    const response=await fetch('/api/lead-radar/session',{credentials:'same-origin',cache:'no-store'});
+    if(!response.ok)return {data:{session:null}};
+    const {user}=await response.json();
+    return {data:{session:{user:{id:user.username,username:user.username,email:user.display_name,role:user.role}}}};
+  },
+  async signOut(){
+    const response=await fetch('/api/lead-radar/session',{method:'DELETE',credentials:'same-origin',cache:'no-store'});
+    if(!response.ok)throw new Error('Could not sign out');
+    return {error:null};
+  }
+ }};
+ return client;
 }
-export async function authorizedFetch(path,opts={}) {
- const sb=getBrowserClient();
- const {data:{session}}=await sb.auth.getSession();
- if(!session)throw new Error('Session expired. Sign in again.');
- const resp=await fetch(path,{...opts,headers:{'Authorization':'Bearer '+session.access_token,'Content-Type':'application/json',...(opts.headers||{})},cache:'no-store'});
- const json=await resp.json().catch(()=>({error:'Unexpected response'}));
- if(!resp.ok)throw new Error(json.detail||json.error||'Request failed');
+export async function authorizedFetch(path,opts={}){
+ const response=await fetch(path,{...opts,credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json',...(opts.headers||{})}});
+ const json=await response.json().catch(()=>({error:'Unexpected response'}));
+ if(!response.ok)throw new Error(json.detail||json.error||'Request failed');
  return json;
 }
