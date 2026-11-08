@@ -51,6 +51,7 @@ export function evidenceFor(project,company={},now=new Date()){
 }
 
 export function computeScore(project,company={},now=new Date()){
+ company = company ?? {};
  const e=evidenceFor(project,company,now), reasons=[...e.reasons];
  const c=project.cabinet_signal||'unknown',d=project.door_signal||'unknown';
  let score=0;
