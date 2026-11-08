@@ -7,6 +7,17 @@ export function parseState(value){
  return {version:1,projects:Array.isArray(src.projects)?src.projects:[],companies:Array.isArray(src.companies)?src.companies:[],activities:Array.isArray(src.activities)?src.activities:[],scans:Array.isArray(src.scans)?src.scans:[]};
 }
 export const projectCompany=(state,p)=>state.companies.find(c=>c.id===p.contractor_company_id)||null;
+/* LIVANE_MANUAL_CRM_V1: discovery records are not CRM accounts. */
+export function isCrmMember(state,company){
+ if(!company)return false;
+ if(company.crm_added_at)return true;
+ // Preserve old records that a person actually worked on before this upgrade.
+ return Boolean(state.activities?.some(a=>a.company_id===company.id)||
+   (company.contact_status && company.contact_status!=='not_contacted')||
+   company.last_contacted_at||company.next_followup_at||company.decision_maker||
+   company.email||company.website||company.employee_count!=null);
+}
+
 const pick=(o,fields)=>Object.fromEntries(fields.map(k=>[k,o[k]??null]));
 const sourceColumns=['source','source_record_id','source_url','permit_number','project_name','address','city','project_type','description','permit_status','permit_date','developer','designer','architect','unit_count','cabinet_signal','door_signal','raw_source'];
 

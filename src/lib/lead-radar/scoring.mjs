@@ -7,6 +7,8 @@ const residential=/\b(residential|residence|condo(?:minium)?s?|apartments?|town\
 const kitchenWork=/\b(kitchen|kitchens)\b.{0,95}\b(remodel\w*|renovat\w*|alter\w*|replac\w*|new|install\w*|reconfigur\w*)|\b(remodel\w*|renovat\w*|alter\w*|replac\w*|new|install\w*|reconfigur\w*)\b.{0,95}\b(kitchen|kitchens)\b/i;
 const noInstallation=/\b(refinish|refacing|reface|paint(?:ing)? cabinets?|resurfac|repair only|countertops? only|backsplash only)\b/i;
 const inactive=/\b(final(?:ed)?|closed|complete(?:d)?|cancel(?:led|ed)|expired|revoked|void|withdrawn|certificate of occupancy)\b/i;
+// Specialty trades are not Livane cabinet/interior-door GCs.
+const irrelevantTrades=/\b(plumb(?:ing|er|ers)?|electric(?:al|ian|ians)?|hvac|mechanical|air[ -]?condition(?:ing)?|glass|glazing|mirror|roof(?:ing|er|ers)?|pool(?:s)?|fire[ -]?sprinkler|fire[ -]?alarm|solar|elevator|irrigation)\b/i;
 
 export function inferSignals(value=''){
  const text=String(value??'');
@@ -30,7 +32,11 @@ export function isInactiveStatus(status){return inactive.test(String(status||'')
 export function evidenceFor(project,company={},now=new Date()){
  const cabinet=project.cabinet_signal||'unknown',door=project.door_signal||'unknown';
  const direct=cabinet==='explicit'||door==='explicit';
- const relevant=direct||cabinet==='potential'; // No generic residence-only leads.
+ const scopeRelevant=direct||cabinet==='potential'; // No generic residence-only leads.
+ const unrelatedContractor=irrelevantTrades.test(String(company?.name||''));
+ const unrelatedPermit=irrelevantTrades.test(String(project.project_type||''))&&!direct;
+ const tradeExcluded=unrelatedContractor||unrelatedPermit;
+ const relevant=scopeRelevant&&!tradeExcluded;
  const inactiveProject=isInactiveStatus(project.permit_status)||['closed','awarded'].includes(project.procurement_status);
  const ageDays=daysOld(sourceUpdateDate(project),now);
  const fresh=ageDays!==null&&ageDays>=0&&ageDays<=180;
@@ -44,10 +50,11 @@ export function evidenceFor(project,company={},now=new Date()){
  if(ageDays===null)reasons.push('Last municipal update unavailable');
  else reasons.push('Municipal record updated '+ageDays+' days ago');
  if(inactiveProject)reasons.push('Permit or procurement is closed/complete');
+ if(tradeExcluded)reasons.push('Specialty contractor/permit outside cabinet and interior-door supply');
  if(!address)reasons.push('Project address not published');
  // Priority means an evidence-based prospect TO CONTACT. It does not mean bidding is open.
- const tier=!relevant||inactiveProject||!address?'archive':direct&&phone&&named&&fresh?'priority':'research';
- return {tier,relevant,direct,inactiveProject,ageDays,phone,named,address,fresh,reasons};
+ const tier=!relevant||inactiveProject||!address||tradeExcluded?'archive':direct&&phone&&named&&fresh?'priority':'research';
+ return {tier,relevant,direct,inactiveProject,tradeExcluded,ageDays,phone,named,address,fresh,reasons};
 }
 
 export function computeScore(project,company={},now=new Date()){
