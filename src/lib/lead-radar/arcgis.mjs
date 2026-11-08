@@ -92,3 +92,61 @@ export async function fetchArcGIS(source, maxRecords=50) {
     return json.features.map(f => normalizeArcGISRecord(source,f.attributes ?? {})).filter(Boolean);
   } finally {clearTimeout(timer);}
 }
+
+/** Small evidence-first search, not a broad list of the latest arbitrary permits.
+ * The SQL WHERE predicate only narrows candidates; all records are validated locally.
+ * If a source refuses UPPER/LIKE we fall back to its recent pages instead of faking data.
+ */
+import {evidenceFor,computeScore} from './scoring.mjs';
+export function focusedWhere(source){
+ const field=source.id==='fort_lauderdale'?'PERMITDESC':'ScopeOfWork';
+ const words=['CABINET','KITCHEN','MILLWORK','CASEWORK','VANITY','INTERIOR DOOR','POCKET DOOR','DOOR REPLAC','DOOR INSTALL','WARDROBE'];
+ return '('+words.map(w=>`UPPER(${field}) LIKE '%${w}%'`).join(' OR ')+')';
+}
+async function fetchPage(source,where,offset,pageSize,fetchImpl=fetch){
+ const params=new URLSearchParams({where,outFields:source.fields,returnGeometry:'false',f:'json',orderByFields:`${source.orderField} DESC`,resultOffset:String(offset),resultRecordCount:String(pageSize)});
+ const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),20000);
+ try{
+  const response=await fetchImpl(source.endpoint+'/query?'+params,{cache:'no-store',signal:controller.signal,headers:{Accept:'application/json'}});
+  if(!response.ok)throw Error('Municipal API HTTP '+response.status);
+  const result=await response.json();
+  if(result.error)throw Error('Municipal API '+(result.error.message||result.error.code));
+  if(!Array.isArray(result.features))throw Error('Municipal response missing features');
+  return result.features;
+ }finally{clearTimeout(timer);}
+}
+export async function fetchFocusedArcGIS(source,{pages=5,pageSize=200,limit=45,fetchImpl=fetch,now=new Date()}={}){
+ const maxPages=Math.min(8,Math.max(1,pages));
+ const size=Math.min(250,Math.max(10,pageSize));
+ const maxLeads=Math.min(100,Math.max(1,limit));
+ const unique=new Set(),records=[];
+ let examined=0,predicate=focusedWhere(source),fallback=false,page=0;
+ while(page<maxPages){
+  let features;
+  try{features=await fetchPage(source,predicate,page*size,size,fetchImpl);}
+  catch(err){
+   if(page===0&&!fallback){predicate='1=1';fallback=true;continue;}
+   throw err;
+  }
+  if(features.length===0){if(page===0&&!fallback){predicate='1=1';fallback=true;continue;}break;}
+  examined+=features.length;
+  for(const item of features){
+   const p=normalizeArcGISRecord(source,item.attributes||{});
+   if(!p)continue;
+   const k=p.source+'|'+p.source_record_id;if(unique.has(k))continue;unique.add(k);
+   // Retain direct work and kitchen-remodel research candidates. Not generic home permits.
+   if(!evidenceFor(p,p.company,now).relevant)continue;
+   // Exclude finalized/closed/expired from intake; old CRM records are not deleted.
+   if(evidenceFor(p,p.company,now).inactiveProject)continue;
+   records.push(p);
+  }
+  page++;
+  if(features.length<size)break;
+ }
+ const sorted=records.sort((a,b)=>{
+  const ea=evidenceFor(a,a.company,now),eb=evidenceFor(b,b.company,now);
+  const ta=ea.tier==='priority'?2:ea.tier==='research'?1:0,tb=eb.tier==='priority'?2:eb.tier==='research'?1:0;
+  return tb-ta || computeScore(b,b.company,now).score-computeScore(a,a.company,now).score;
+ }).slice(0,maxLeads);
+ return {records:sorted,examined,shortlisted:sorted.length,fallbackUsed:fallback};
+}

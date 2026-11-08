@@ -1,6 +1,7 @@
 import {authorize,denied} from '../../../../lib/lead-radar/auth.js';
 import {loadState,mutateState} from '../../../../lib/lead-radar/storage.js';
 import {projectCompany,updateProject} from '../../../../lib/lead-radar/model.mjs';
+import {evidenceFor,inferSignals,computeScore} from '../../../../lib/lead-radar/scoring.mjs';
 export const dynamic='force-dynamic';
 const noStore={'Cache-Control':'no-store'};
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -11,8 +12,15 @@ export async function GET(req){
  try{
   const {state}=await loadState();const city=new URL(req.url).searchParams.get('city');
   const records=state.projects.filter(p=>!city||p.city===city)
-   .sort((x,y)=>(Number(y.score)||0)-(Number(x.score)||0)||String(y.last_checked_at||'').localeCompare(String(x.last_checked_at||'')))
-   .slice(0,500).map(p=>({...p,company:projectCompany(state,p)}));
+   .map(p=>{
+    const company=projectCompany(state,p);
+    const signals=inferSignals([p.description,p.project_type].filter(Boolean).join(' '));
+    const current={...p,cabinet_signal:signals.cabinet,door_signal:signals.door};
+    const quality=evidenceFor(current,company);const fit=computeScore(current,company);
+    return {...current,score:fit.score,score_reasons:fit.reasons,company,lead_tier:quality.tier,lead_why:quality.reasons,source_age_days:quality.ageDays};
+   })
+   .sort((a,b)=>{const rank={priority:2,research:1,archive:0};return (rank[b.lead_tier]||0)-(rank[a.lead_tier]||0)||b.score-a.score||String(b.last_checked_at||'').localeCompare(String(a.last_checked_at||''));})
+   .slice(0,500);
   return Response.json({projects:records},{headers:noStore});
  }catch(err){return Response.json({error:'Could not read projects',detail:String(err.message).slice(0,180)},{status:503,headers:noStore});}
 }
